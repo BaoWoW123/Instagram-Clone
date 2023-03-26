@@ -11,10 +11,6 @@ exports[`App renders component after click event snapshot test 1`] = `
       <div>
         Itstagram
       </div>
-      <input
-        placeholder="Search"
-        type="text"
-      />
       <div
         class="navBar"
       >
@@ -22,14 +18,61 @@ exports[`App renders component after click event snapshot test 1`] = `
           <a
             href="/"
           >
+            <img
+              src="home.png"
+            />
             Home
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+            <img
+              src="search.png"
+            />
+            Search
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+             
+            <img
+              src="explore.png"
+            />
+            Explore
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+            <img
+              src="message.png"
+            />
+            Messages
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+            <img
+              src="notification.png"
+            />
+            Notifications
           </a>
         </div>
         <div>
           <a
             href="/post"
           >
-            Post
+            <img
+              src="create.png"
+            />
+            Create
           </a>
         </div>
         <div>
@@ -37,6 +80,16 @@ exports[`App renders component after click event snapshot test 1`] = `
             href="/profile"
           >
             Profile
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+            <img
+              src="more.png"
+            />
+            More
           </a>
         </div>
       </div>

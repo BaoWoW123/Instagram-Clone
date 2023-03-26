@@ -5,25 +5,37 @@ html {
 
 .App {
   display: flex;
-  flex-direction: column;
   height: 100vh; /* temporary */
-  font-size: 30px;
+  font-size: 2rem;
 }
 
 .App > :last-child {
   flex-grow: 1;
+  background-color: whitesmoke;
 }
 
 .header {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  border-right: 2px solid lightgray;
+  padding: 20px;
+  padding-right: 60px;
+  gap: 20px;
 }
 
-.navBar {
-  display: flex;
-  gap: 20px;
-  padding: 0px 20px;
+.navBar>* {
+    padding: 20px 0px;
+}
+
+.navBar> * > * {
+    display: flex;
+    align-items: flex-end;
+}
+.navBar>:last-child {
+    position: absolute;
+    bottom: 0;
 }
 
 a {
