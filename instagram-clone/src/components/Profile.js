@@ -1,11 +1,11 @@
-import '../styles/Profile.css'
+import "../styles/Profile.css";
 
 const Profile = () => {
-    return (
-        <div className="Profile">
-            Profile
-        </div>
-    )
-}
+  return (
+    <div className="Profile">
+      <h1>Profile</h1>
+    </div>
+  );
+};
 
 export default Profile;
