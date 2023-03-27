@@ -1,5 +1,61 @@
 .Home {
+    display: grid;
+    grid-template-columns: 5fr 4fr;
+}
+
+.feed {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
+.followers {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    border: 2px solid lightgray;
+    background-color: white;
+    border-radius: 10px;
+    width: 35rem;
+    gap: 10px;
+    padding: 15px 0px;
+}
+
+.follower {
+    text-align: center;
+    font-size: 20px;
+    max-width: 80px;
+}
+
+.followerImg {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    background: linear-gradient(45deg, yellow, red, purple);
+    border-radius: 100%;
+    padding: 5px;
+}
+.followerImg>img {
+    width: 60px;
+    height: 60px;
+    border-radius:100%;
+    padding: 3px;
+    background-color: white;
+}
+.posts>* {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+    width: 35rem;
+    background-color: white;
 }

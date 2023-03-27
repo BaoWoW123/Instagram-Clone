@@ -8,7 +8,9 @@ exports[`App renders component after click event snapshot test 1`] = `
     <div
       class="header"
     >
-      <div>
+      <div
+        class="title"
+      >
         Itstagram
       </div>
       <div
@@ -43,6 +45,17 @@ exports[`App renders component after click event snapshot test 1`] = `
               src="explore.png"
             />
             Explore
+          </a>
+        </div>
+        <div>
+          <a
+            href="/"
+          >
+             
+            <img
+              src="explore.png"
+            />
+            Reels
           </a>
         </div>
         <div>
@@ -97,9 +110,138 @@ exports[`App renders component after click event snapshot test 1`] = `
     <div
       class="Home"
     >
-      <h1>
-        Home
-      </h1>
+      <div
+        class="feed"
+      >
+        <div
+          class="followers"
+        >
+          <div
+            class="follower"
+            data-id="0"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="rosie.jpg"
+              />
+            </div>
+            <div>
+              rosie
+            </div>
+          </div>
+          <div
+            class="follower"
+            data-id="1"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="dot.jpg"
+              />
+            </div>
+            <div>
+              dot
+            </div>
+          </div>
+          <div
+            class="follower"
+            data-id="2"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="flick.jpg"
+              />
+            </div>
+            <div>
+              flick
+            </div>
+          </div>
+          <div
+            class="follower"
+            data-id="3"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="heimlich.jpg"
+              />
+            </div>
+            <div>
+              heimlich
+            </div>
+          </div>
+          <div
+            class="follower"
+            data-id="4"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="hopper.jpg"
+              />
+            </div>
+            <div>
+              hopper
+            </div>
+          </div>
+          <div
+            class="follower"
+            data-id="5"
+          >
+            <div
+              class="followerImg"
+            >
+              <img
+                src="night.jpg"
+              />
+            </div>
+            <div>
+              night
+            </div>
+          </div>
+        </div>
+        <div
+          class="posts"
+        >
+          <div>
+            <h1>
+              Home
+            </h1>
+          </div>
+          <div>
+            test
+          </div>
+          <div>
+            anoterh test
+          </div>
+        </div>
+      </div>
+      <div
+        class="right"
+      >
+        right bar
+        <div
+          class="suggestions"
+        >
+          Suggestions For You
+          <div>
+            person
+          </div>
+          <div>
+            person2
+          </div>
+          <div>
+            person3
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

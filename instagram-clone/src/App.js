@@ -5,19 +5,19 @@ import Login from "./components/Login";
 import Post from "./components/Post";
 import Profile from "./components/Profile";
 import "./styles/App.css";
-import home from './assets/home.png'
-import search from './assets/search.png'
-import explore from './assets/explore.png'
-import message from './assets/message.png'
-import notification from './assets/notification.png'
-import create from './assets/create.png'
-import more from './assets/more.png'
+import home from './assets/navBar/home.png'
+import search from './assets/navBar/search.png'
+import explore from './assets/navBar/explore.png'
+import message from './assets/navBar/message.png'
+import notification from './assets/navBar/notification.png'
+import create from './assets/navBar/create.png'
+import more from './assets/navBar/more.png'
 
 const App = () => {
   return (
     <div className="App">
       <div className="header">
-        <div>Itstagram</div>
+        <div className="title">Itstagram</div>
         <div className="navBar">
           <div>
             <Link to="/"><img src={home}/>Home</Link>
@@ -27,6 +27,9 @@ const App = () => {
           </div>
           <div>
             <Link to="/"> <img src={explore}/>Explore</Link>
+          </div>
+          <div>
+            <Link to="/"> <img src={explore}/>Reels</Link>
           </div>
           <div>
             <Link to="/"><img src={message}/>Messages</Link>
