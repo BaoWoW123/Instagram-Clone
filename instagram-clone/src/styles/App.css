@@ -21,8 +21,8 @@ html {
   align-items: flex-start;
   justify-content: flex-start;
   border-right: 2px solid lightgray;
-  padding: 20px;
-  padding-right: 60px;
+  padding: 0px 50px;
+  padding-right: 120px;
   gap: 30px;
 }
 

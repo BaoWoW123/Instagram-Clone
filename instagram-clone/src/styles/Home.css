@@ -10,13 +10,10 @@
     gap: 1.5rem;
     margin-top: 2rem;
 }
-.right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
-    margin-left: 2rem;
-}
+
+
+
+/* FOLLOWER'S STORIES */
 .followers {
     display: flex;
     justify-content: center;
@@ -50,6 +47,8 @@
     padding: 3px;
     background-color: white;
 }
+
+/* FEED */
 .posts>* {
     display: flex;
     justify-content: center;
@@ -58,4 +57,81 @@
     border-radius: 5px;
     width: 35rem;
     background-color: white;
+}
+
+/* RIGHT DIV */
+.rightDiv {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    width: 25rem;
+}
+
+.rightDiv > * button {
+    align-items: flex-end;
+    border: none;
+    background-color: transparent;
+    color: dodgerblue;
+    font-size: large;
+    font-weight: 600;
+}
+
+.rightDiv > :first-child > * img {
+    width: 70px;
+    border-radius: 50%;
+}
+
+.suggestSwitchAcc{
+    display: flex;
+    flex: 1;
+    gap: 15px;
+}
+.suggestSwitchAcc>:last-child>:first-child {
+    font-weight: bold;
+}
+
+.suggestSwitchAcc>:last-child>:last-child {
+    color: gray;
+    font-weight: bold;
+}
+.suggestSwitchAcc>:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.suggestions>* {
+    padding: 10px 0px;
+}
+
+.suggestionFollowers > :first-child{
+    display: flex;
+    gap: 15px;
+    flex: 1;
+}
+
+.suggestionFollowers > * img{
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.suggestions>*, .rightDiv>:first-child {
+    display: flex;
+    justify-content: space-between;
+}
+
+.suggestionFollowers > :first-child >:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.suggestFollowerName {
+    font-weight: bold;
+}
+.suggestFollowerName + div {
+    color: gray;
+    font-size: 15px;
+    font-weight: bold;
 }
