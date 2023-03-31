@@ -1,137 +1,220 @@
 .Home {
-    display: grid;
-    grid-template-columns: 5fr 4fr;
+  display: grid;
+  grid-template-columns: 5fr 4fr;
 }
 
 .feed {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 1.5rem;
-    margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
-
-
 /* FOLLOWER'S STORIES */
-.followers {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid lightgray;
-    background-color: white;
-    border-radius: 10px;
-    width: 35rem;
-    gap: 10px;
-    padding: 15px 0px;
+
+.storiesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 20vh;
+  position: relative;
+}
+
+.storiesWrapper {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid lightgray;
+  background-color: white;
+  border-radius: 10px;
+  width: 36rem;
+  gap: 10px;
+  padding: 15px 0px;
+  position: relative;
+}
+
+.hidden {
+  display: none;
+}
+
+.storiesWrapper > :first-child {
+  padding-left: 10px;
+}
+
+.storiesContainer > button {
+  background-color: beige;
+  border: beige;
+  border-radius: 50%;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.storiesPrevBtn {
+  position: absolute;
+  left: 10px;
+  z-index: 1;
+}
+
+.storiesNextBtn {
+  position: absolute;
+  right: 10px;
+  width: min-content;
+  z-index: 1;
 }
 
 .follower {
-    text-align: center;
-    font-size: 20px;
-    max-width: 80px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  font-size: 20px;
+  max-width: 80px;
+  transition: 0.2s;
 }
 
 .followerImg {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    background: linear-gradient(45deg, yellow, red, purple);
-    border-radius: 100%;
-    padding: 5px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  background: linear-gradient(45deg, yellow, red, purple);
+  border-radius: 100%;
+  padding: 4px;
 }
-.followerImg>img {
-    width: 60px;
-    height: 60px;
-    border-radius:100%;
-    padding: 3px;
-    background-color: white;
+.followerImg > img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  padding: 3px;
+  background-color: white;
 }
 
 /* FEED */
-.posts>* {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 2px solid lightgray;
-    border-radius: 5px;
-    width: 35rem;
-    background-color: white;
+.posts > * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  width: 36rem;
+  background-color: white;
+}
+.post {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
+.postInfo {
+  display: flex;
+}
+
+.postInfo > :last-child {
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+}
+
+.post > :first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+  padding: 10px 0px;
+}
+.post > :first-child > :last-child {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.post > :first-child > :first-child > img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.post > img {
+  width: 100%;
+  height: 100%;
+}
+
+.followersNextBtn {
+  position: absolute;
+}
 /* RIGHT DIV */
 .rightDiv {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2rem;
-    margin-left: 2rem;
-    width: 25rem;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-left: 2rem;
+  width: 25rem;
 }
 
 .rightDiv > * button {
-    align-items: flex-end;
-    border: none;
-    background-color: transparent;
-    color: dodgerblue;
-    font-size: large;
-    font-weight: 600;
+  align-items: flex-end;
+  border: none;
+  background-color: transparent;
+  color: dodgerblue;
+  font-size: large;
+  font-weight: 600;
 }
 
 .rightDiv > :first-child > * img {
-    width: 70px;
-    border-radius: 50%;
+  width: 70px;
+  border-radius: 50%;
 }
 
-.suggestSwitchAcc{
-    display: flex;
-    flex: 1;
-    gap: 15px;
+.suggestSwitchAcc {
+  display: flex;
+  flex: 1;
+  gap: 15px;
 }
-.suggestSwitchAcc>:last-child>:first-child {
-    font-weight: bold;
-}
-
-.suggestSwitchAcc>:last-child>:last-child {
-    color: gray;
-    font-weight: bold;
-}
-.suggestSwitchAcc>:last-child {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.suggestSwitchAcc > :last-child > :first-child {
+  font-weight: bold;
 }
 
-.suggestions>* {
-    padding: 10px 0px;
+.suggestSwitchAcc > :last-child > :last-child {
+  color: gray;
+  font-weight: bold;
+}
+.suggestSwitchAcc > :last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
-.suggestionFollowers > :first-child{
-    display: flex;
-    gap: 15px;
-    flex: 1;
+.suggestions > * {
+  padding: 10px 0px;
 }
 
-.suggestionFollowers > * img{
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+.suggestionFollowers > :first-child {
+  display: flex;
+  gap: 15px;
+  flex: 1;
 }
 
-.suggestions>*, .rightDiv>:first-child {
-    display: flex;
-    justify-content: space-between;
+.suggestionFollowers > * img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
 
-.suggestionFollowers > :first-child >:last-child {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+.suggestions > *,
+.rightDiv > :first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.suggestionFollowers > :first-child > :last-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .suggestFollowerName {
-    font-weight: bold;
+  font-weight: bold;
 }
 .suggestFollowerName + div {
-    color: gray;
-    font-size: 15px;
-    font-weight: bold;
+  color: gray;
+  font-size: 15px;
+  font-weight: bold;
 }

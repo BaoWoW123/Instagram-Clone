@@ -114,96 +114,196 @@ exports[`App renders component after click event snapshot test 1`] = `
         class="feed"
       >
         <div
-          class="followers"
+          class="storiesContainer"
         >
+          <button
+            class="storiesNextBtn"
+          >
+            &gt;
+          </button>
+          <button
+            class="storiesPrevBtn hidden"
+          >
+            &lt; 
+          </button>
           <div
-            class="follower"
-            data-id="0"
+            class="storiesWrapper"
           >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="0"
             >
-              <img
-                src="rosie.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="rosie.jpg"
+                />
+              </div>
+              <div>
+                rosie
+              </div>
             </div>
-            <div>
-              rosie
-            </div>
-          </div>
-          <div
-            class="follower"
-            data-id="1"
-          >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="1"
             >
-              <img
-                src="dot.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="dot.jpg"
+                />
+              </div>
+              <div>
+                dot
+              </div>
             </div>
-            <div>
-              dot
-            </div>
-          </div>
-          <div
-            class="follower"
-            data-id="2"
-          >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="2"
             >
-              <img
-                src="flick.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="flick.jpg"
+                />
+              </div>
+              <div>
+                flick
+              </div>
             </div>
-            <div>
-              flick
-            </div>
-          </div>
-          <div
-            class="follower"
-            data-id="3"
-          >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="3"
             >
-              <img
-                src="heimlich.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="heimlich.jpg"
+                />
+              </div>
+              <div>
+                heimlich
+              </div>
             </div>
-            <div>
-              heimlich
-            </div>
-          </div>
-          <div
-            class="follower"
-            data-id="4"
-          >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="4"
             >
-              <img
-                src="hopper.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="hopper.jpg"
+                />
+              </div>
+              <div>
+                hopper
+              </div>
             </div>
-            <div>
-              hopper
-            </div>
-          </div>
-          <div
-            class="follower"
-            data-id="5"
-          >
             <div
-              class="followerImg"
+              class="follower"
+              data-id="5"
             >
-              <img
-                src="night.jpg"
-              />
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="rosie.jpg"
+                />
+              </div>
+              <div>
+                rosie
+              </div>
             </div>
-            <div>
-              night
+            <div
+              class="follower"
+              data-id="6"
+            >
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="dot.jpg"
+                />
+              </div>
+              <div>
+                dot
+              </div>
+            </div>
+            <div
+              class="follower"
+              data-id="7"
+            >
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="flick.jpg"
+                />
+              </div>
+              <div>
+                flick
+              </div>
+            </div>
+            <div
+              class="follower"
+              data-id="8"
+            >
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="heimlich.jpg"
+                />
+              </div>
+              <div>
+                heimlich
+              </div>
+            </div>
+            <div
+              class="follower"
+              data-id="9"
+            >
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="hopper.jpg"
+                />
+              </div>
+              <div>
+                hopper
+              </div>
+            </div>
+            <div
+              class="follower"
+              data-id="10"
+            >
+               
+              <div
+                class="followerImg"
+              >
+                <img
+                  src="night.jpg"
+                />
+              </div>
+              <div>
+                night
+              </div>
             </div>
           </div>
         </div>
@@ -215,30 +315,415 @@ exports[`App renders component after click event snapshot test 1`] = `
               Home
             </h1>
           </div>
-          <div>
-            test
+          <div
+            class="post"
+          >
+            <div>
+              <div
+                class="postInfo"
+              >
+                <img
+                  src="dot.jpg"
+                />
+                <div
+                  style="font-weight: bold;"
+                >
+                  dot
+                </div>
+              </div>
+              <img
+                src="post.png"
+              />
+            </div>
+            <img
+              src="rockWall.jpg"
+            />
+            <div
+              class="postDescrip"
+            >
+              hola
+            </div>
           </div>
-          <div>
-            anoterh test
+          <div
+            class="post"
+          >
+            <div>
+              <div
+                class="postInfo"
+              >
+                <img
+                  src="flick.jpg"
+                />
+                <div
+                  style="font-weight: bold;"
+                >
+                  flick
+                </div>
+              </div>
+              <img
+                src="post.png"
+              />
+            </div>
+            <img
+              src="rockWallBlack.jpg"
+            />
+            <div
+              class="postDescrip"
+            >
+              hola
+            </div>
+          </div>
+          <div
+            class="post"
+          >
+            <div>
+              <div
+                class="postInfo"
+              >
+                <img
+                  src="heimlich.jpg"
+                />
+                <div
+                  style="font-weight: bold;"
+                >
+                  heimlich
+                </div>
+              </div>
+              <img
+                src="post.png"
+              />
+            </div>
+            <img
+              src="rockWall.jpg"
+            />
+            <div
+              class="postDescrip"
+            >
+              hola
+            </div>
           </div>
         </div>
       </div>
       <div
-        class="right"
+        class="rightDiv"
       >
-        right bar
+        <div>
+          <div
+            class="suggestSwitchAcc"
+          >
+            <img
+              src="rosie.jpg"
+            />
+            <div>
+              <div>
+                Account Username
+              </div>
+              <div>
+                Some username
+              </div>
+            </div>
+          </div>
+          <button>
+            Switch
+          </button>
+        </div>
         <div
           class="suggestions"
         >
-          Suggestions For You
           <div>
-            person
+            Suggestions For You
+             
+            <button
+              style="color: black;"
+            >
+              See All
+            </button>
           </div>
-          <div>
-            person2
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="rosie.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  rosie
+                </div>
+                <div>
+                  Followed by 
+                  rosie
+                   + 
+                  3
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
           </div>
-          <div>
-            person3
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="dot.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  dot
+                </div>
+                <div>
+                  Followed by 
+                  dot
+                   + 
+                  4
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="flick.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  flick
+                </div>
+                <div>
+                  Followed by 
+                  flick
+                   + 
+                  5
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="heimlich.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  heimlich
+                </div>
+                <div>
+                  Followed by 
+                  heimlich
+                   + 
+                  6
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="hopper.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  hopper
+                </div>
+                <div>
+                  Followed by 
+                  hopper
+                   + 
+                  7
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="rosie.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  rosie
+                </div>
+                <div>
+                  Followed by 
+                  rosie
+                   + 
+                  8
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="dot.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  dot
+                </div>
+                <div>
+                  Followed by 
+                  dot
+                   + 
+                  9
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="flick.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  flick
+                </div>
+                <div>
+                  Followed by 
+                  flick
+                   + 
+                  10
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="heimlich.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  heimlich
+                </div>
+                <div>
+                  Followed by 
+                  heimlich
+                   + 
+                  11
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="hopper.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  hopper
+                </div>
+                <div>
+                  Followed by 
+                  hopper
+                   + 
+                  12
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
+          </div>
+          <div
+            class="suggestionFollowers"
+          >
+            <div>
+              <img
+                src="night.jpg"
+              />
+              <div>
+                <div
+                  class="suggestFollowerName"
+                >
+                  night
+                </div>
+                <div>
+                  Followed by 
+                  night
+                   + 
+                  13
+                   more
+                </div>
+              </div>
+            </div>
+            <button>
+              Follow
+            </button>
           </div>
         </div>
       </div>
