@@ -1,12 +1,17 @@
 import "../styles/Home.css";
 import { testImgArr, testPostArr } from "./testImages";
 import post from "../assets/navBar/post.png";
-const Home = () => {
-  const followers = document.querySelectorAll(".follower");
+import bookmark from "../assets/navBar/bookmark.png";
+import send from "../assets/navBar/send.png";
+import postmessage from "../assets/navBar/postmessage.png";
+import like from "../assets/navBar/heart.png";
 
-  const showNext = async () => {
-    await followers.forEach((el) => {
-      el.style.transform = "translateX(-360px)";
+const Home = () => {
+    
+  const showNext = () => {
+    const followers = document.querySelectorAll(".follower");
+    followers.forEach((el) => {
+      return (el.style.transform = "translateX(-360px)");
     });
     const prevBtn = document.querySelector(".storiesPrevBtn");
     const nextBtn = document.querySelector(".storiesNextBtn");
@@ -14,9 +19,10 @@ const Home = () => {
     prevBtn.className = "storiesPrevBtn";
   };
 
-  const showPrev = async () => {
-    await followers.forEach((el) => {
-      el.style.transform = "translateX(0px)";
+  const showPrev = () => {
+    const followers = document.querySelectorAll(".follower");
+    followers.forEach((el) => {
+      return (el.style.transform = "translateX(0px)");
     });
     const prevBtn = document.querySelector(".storiesPrevBtn");
     const nextBtn = document.querySelector(".storiesNextBtn");
@@ -25,7 +31,7 @@ const Home = () => {
   };
 
   return (
-    <div className="Home">
+    <div className="Home" aria-label="Home">
       <div className="feed">
         <div className="storiesContainer">
           <button className="storiesNextBtn" onClick={showNext}>
@@ -35,13 +41,9 @@ const Home = () => {
             {"< "}
           </button>
           <div className="storiesWrapper">
-            {/* slider-wrapper */}
-
             {testImgArr.map((el, i) => {
               return (
                 <div className="follower" data-id={i}>
-                  {" "}
-                  {/* slider */}
                   <div className="followerImg">
                     <img src={el.img} />
                   </div>
@@ -52,10 +54,7 @@ const Home = () => {
           </div>
         </div>
         <div className="posts">
-          <div>
-            <h1>Home</h1>
-          </div>
-          {testPostArr.map((el) => {
+          {testPostArr.map((el, i) => {
             return (
               <div className="post">
                 <div>
@@ -66,7 +65,36 @@ const Home = () => {
                   <img src={post} />
                 </div>
                 <img src={el.post} />
-                <div className="postDescrip">hola</div>
+                <div className="postDescrip">
+                  <div className="postNavBar">
+                    <div>
+                      <img src={like} />
+                      <img src={postmessage} />
+                      <img src={send} />
+                    </div>
+                    <div>Nav Dots here</div>
+                    <div>
+                      <img src={bookmark} />
+                    </div>
+                  </div>
+                  <div className="postLikes">
+                    <div>Images</div>
+                    <div>
+                      Like by <b>username</b> and <b>others</b>
+                    </div>
+                  </div>
+                  <div className="postCaption">
+                    <div>
+                      <b>{el.username}</b> Some captions here and there or maybe
+                      everywhere
+                    </div>
+                    <div>View {Math.ceil(Math.random() * 10)} comments</div>
+                  </div>
+                  <div className="postComment">
+                    <input type="text" placeholder="Add a comment..."></input>
+                    <button>Post</button>
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -89,20 +117,22 @@ const Home = () => {
             <button style={{ color: "black" }}>See All</button>
           </div>
           {testImgArr.map((el, i) => {
-            return (
-              <div className="suggestionFollowers">
-                <div>
-                  <img src={el.img} />
+            if (i < 5) {
+              return (
+                <div className="suggestionFollowers">
                   <div>
-                    <div className="suggestFollowerName">{el.username}</div>
+                    <img src={el.img} />
                     <div>
-                      Followed by {el.username} + {i + 3} more
+                      <div className="suggestFollowerName">{el.username}</div>
+                      <div>
+                        Followed by {el.username} + {i + 3} more
+                      </div>
                     </div>
                   </div>
+                  <button>Follow</button>
                 </div>
-                <button>Follow</button>
-              </div>
-            );
+              );
+            }
           })}
         </div>
       </div>

@@ -20,16 +20,16 @@ describe("App renders component after click event", () => {
         <App />
       </BrowserRouter>
     );
-    expect(screen.getByRole("heading").textContent).toBe("Home");
+    expect(screen.getByLabelText("Home").className).toBe("Home");
   });
-  test("simulate Profile link click", () => {
+  test("simulate Profile link click", async () => {
     render(
       <BrowserRouter>
         <App />
       </BrowserRouter>
     );
     const testLink = screen.getByText("Profile", { type: "a" });
-    userEvent.click(testLink);
-    expect(screen.getByRole("heading").textContent).toBe("Home");
+    await userEvent.click(testLink);
+    expect(screen.getByLabelText("Profile").className).toBe("Profile");
   });
 });

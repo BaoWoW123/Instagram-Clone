@@ -1,0 +1,131 @@
+.loginPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 400px;
+  gap: 5px;
+  width: 300px;
+  padding: 0px 20px;
+  background: white;
+}
+
+.loginPage input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid lightgray;
+  background-color: whitesmoke;
+  box-sizing: border-box;
+}
+
+.loginForm > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginForm h2 {
+  width: 90%;
+  text-align: center;
+  border-bottom: 2px solid lightgray;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.passwordDiv {
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.passwordDiv > button {
+  position: absolute;
+  right: 0;
+  color: black;
+  opacity: 0.7;
+}
+
+.passwordDiv > button:hover {
+  opacity: 0.4;
+}
+
+h2 :first-child {
+  background: white;
+  padding: 0 20px;
+  color: gray;
+  font-size: 15px;
+}
+
+h1 {
+  padding: 20px 0px;
+}
+.loginBtn {
+  background-color: dodgerblue !important;
+  width: 100%;
+  padding: 10px 0px;
+  border-radius: 8px;
+  color: white;
+  opacity: 0.7;
+}
+
+.loginBtn:hover {
+  opacity: 1;
+}
+
+fieldset {
+  margin-bottom: 10px;
+  padding: 0;
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.signUp {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.signUp button {
+  color: dodgerblue;
+  cursor: pointer;
+}
+
+.loginPage button {
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+}
+.googleLogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0px;
+}
+.googleLogin > div {
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+.googleLogin > img {
+  width: 20px;
+  padding-right: 10px;
+}
+
+.googleLogin>:last-child:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+.loginForm> :last-child {
+    font-size: 12px;
+    cursor: pointer;
+}

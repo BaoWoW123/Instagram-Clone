@@ -12,6 +12,7 @@ import message from './assets/navBar/message.png'
 import notification from './assets/navBar/notification.png'
 import create from './assets/navBar/create.png'
 import more from './assets/navBar/more.png'
+import reels from './assets/navBar/reels.png'
 
 const App = () => {
   return (
@@ -29,7 +30,7 @@ const App = () => {
             <Link to="/"> <img src={explore}/>Explore</Link>
           </div>
           <div>
-            <Link to="/"> <img src={explore}/>Reels</Link>
+            <Link to="/"> <img src={reels}/>Reels</Link>
           </div>
           <div>
             <Link to="/"><img src={message}/>Messages</Link>
