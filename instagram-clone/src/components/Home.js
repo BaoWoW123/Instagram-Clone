@@ -43,7 +43,7 @@ const Home = () => {
           <div className="storiesWrapper">
             {testImgArr.map((el, i) => {
               return (
-                <div className="follower" data-id={i}>
+                <div className="follower" key={i}>
                   <div className="followerImg">
                     <img src={el.img} />
                   </div>
@@ -56,7 +56,7 @@ const Home = () => {
         <div className="posts">
           {testPostArr.map((el, i) => {
             return (
-              <div className="post">
+              <div className="post" key={i}>
                 <div>
                   <div className="postInfo">
                     <img src={el.img} />
@@ -103,8 +103,8 @@ const Home = () => {
       <div className="rightDiv">
         <div>
           <div className="suggestSwitchAcc">
-            <img src={testImgArr[0].img} />
-            <div>
+            <img className="accImg" src={testImgArr[0].img} />
+            <div className="rightDivAcc">
               <div>Account Username</div>
               <div>Some username</div>
             </div>
@@ -119,7 +119,7 @@ const Home = () => {
           {testImgArr.map((el, i) => {
             if (i < 5) {
               return (
-                <div className="suggestionFollowers">
+                <div className="suggestionFollowers" key={i}>
                   <div>
                     <img src={el.img} />
                     <div>

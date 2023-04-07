@@ -1,19 +1,19 @@
 import "../styles/Login.css";
 import google from "../assets/misc/googleLogo.png";
-const Login = () => {
+const Login = (props) => {
   const showPassword = (e) => {
     e.preventDefault();
     const pw = document.querySelector(".password");
     return pw.type === "password" ? (pw.type = "text") : (pw.type = "password");
   };
-  const loginAcc = () => {};
+
   return (
     <div className="loginPage">
       <div>
         <fieldset>
           <form className="loginForm">
             <h1>Itstagram</h1>
-            <input type="text" placeholder="Phone number, username, or email" />
+            <input type="text" placeholder="Email" />
             <div className="passwordDiv">
               <input
                 type="password"
@@ -22,15 +22,15 @@ const Login = () => {
               />
               <button onClick={showPassword}>Show</button>
             </div>
-            <button className="loginBtn" onClick={loginAcc}>
+            <button className="loginBtn" >
               Log in
             </button>
             <h2>
               <span className="OR">OR</span>
             </h2>
-            <span className="googleLogin">
+            <span className="googleLogin" >
               <img src={google} />
-              <div>Login with Google</div>
+              <div onClick={props.signIn}>Login with Google</div>
             </span>
             <div>Forgot password?</div>
           </form>
