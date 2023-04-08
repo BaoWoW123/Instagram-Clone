@@ -1,4 +1,4 @@
-import "../styles/Login.css";
+import "../styles/Forms.css";
 import google from "../assets/misc/googleLogo.png";
 const Login = (props) => {
   const showPassword = (e) => {
@@ -7,13 +7,20 @@ const Login = (props) => {
     return pw.type === "password" ? (pw.type = "text") : (pw.type = "password");
   };
 
+  const logInEmail = (e) => {
+    e.preventDefault()
+    const email = document.querySelector('.email').value
+    const pw = document.querySelector('.password').value
+    props.logInEmail(email, pw)
+  }
+  
   return (
     <div className="loginPage">
       <div>
         <fieldset>
           <form className="loginForm">
             <h1>Itstagram</h1>
-            <input type="text" placeholder="Email" />
+            <input type="email" placeholder="Email" className="email"/>
             <div className="passwordDiv">
               <input
                 type="password"
@@ -22,7 +29,7 @@ const Login = (props) => {
               />
               <button onClick={showPassword}>Show</button>
             </div>
-            <button className="loginBtn" >
+            <button className="loginBtn" onClick={logInEmail} >
               Log in
             </button>
             <h2>
@@ -30,14 +37,14 @@ const Login = (props) => {
             </h2>
             <span className="googleLogin" >
               <img src={google} />
-              <div onClick={props.signIn}>Login with Google</div>
+              <div onClick={props.signInGoogle}>Login with Google</div>
             </span>
             <div>Forgot password?</div>
           </form>
         </fieldset>
         <fieldset>
           <div className="signUp">
-            Don't have an account? <button>Sign up</button>
+            Don't have an account? <button onClick={props.routeSignup}>Sign up</button>
           </div>
         </fieldset>
       </div>

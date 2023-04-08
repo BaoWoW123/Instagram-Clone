@@ -4,8 +4,6 @@ html {
 }
 
 .App {
-  display: flex;
-  height: 100%; /* temporary */
   font-size: 17px;
   font-family: sans-serif;
 }

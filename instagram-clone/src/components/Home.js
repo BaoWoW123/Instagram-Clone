@@ -5,8 +5,9 @@ import bookmark from "../assets/navBar/bookmark.png";
 import send from "../assets/navBar/send.png";
 import postmessage from "../assets/navBar/postmessage.png";
 import like from "../assets/navBar/heart.png";
+import NavBar from "./NavBar";
 
-const Home = () => {
+const Home = (props) => {
     
   const showNext = () => {
     const followers = document.querySelectorAll(".follower");
@@ -32,6 +33,7 @@ const Home = () => {
 
   return (
     <div className="Home" aria-label="Home">
+      <NavBar signOut={props.signOut}/>
       <div className="feed">
         <div className="storiesContainer">
           <button className="storiesNextBtn" onClick={showNext}>

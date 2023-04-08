@@ -1,39 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Post from "./components/Post";
 import Profile from "./components/Profile";
 import "./styles/App.css";
-import home from "./assets/navBar/home.png";
-import search from "./assets/navBar/search.png";
-import explore from "./assets/navBar/explore.png";
-import message from "./assets/navBar/message.png";
-import notification from "./assets/navBar/notification.png";
-import create from "./assets/navBar/create.png";
-import more from "./assets/navBar/more.png";
-import reels from "./assets/navBar/reels.png";
+import Signup from "./components/Signup";
 import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, db } from "./firebase";
 
 const App = () => {
+
+  let [user, setUser] = useState(); 
   const navigate = useNavigate();
 
+  const logInEmail = (email, pw) => {
+    signInWithEmailAndPassword(getAuth(), email, pw).then((userInfo) => {
+      console.log('signed in', userInfo)
+      navigate('/home')
+    }).catch((error) => {
+      alert(error)
+    })
+  }
+  const createAcc = (email, pw) => {
+    createUserWithEmailAndPassword(getAuth(), email, pw).then((userInfo) => {
+      //signed in
+      console.log('created email acc', userInfo)
+      navigate('/home')
+    }).catch((error) => {
+      alert(error)
+    })
+  }
+
+  const routeSignup = () => {
+    navigate('/signup')
+  }
+
+  const routeLogin = () => {
+    navigate('/login')
+  }
+
   const signInGoogle = async () => {
-    let accImg = document.querySelector('.accImg')
-    const auth = getAuth();
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
-    navigate("/")
+    setUser(user = auth)//user resets on restart
+    navigate("/home")
     setTimeout(function(){updatePage(auth)},1)//delayed updatePage(), can't await navigate()
   };
-  const signOutGoogle = () => {
+  const signOutAcc = () => {
     const moreMenu = document.querySelector(".moreMenu");
     if (moreMenu.className === "moreMenu") {
       moreMenu.className = "moreMenu hidden";
@@ -58,92 +80,20 @@ const App = () => {
     onAuthStateChanged(getAuth());
   };
 
-  const showMore = () => {
-    const moreMenu = document.querySelector(".moreMenu");
-    if (moreMenu.className === "moreMenu hidden") {
-      moreMenu.className = "moreMenu";
-      moreMenu.style.backgroundColor = "lightgray";
-    } else {
-      moreMenu.className = "moreMenu hidden";
-      moreMenu.style.backgroundColor = "none";
-    }
-  };
+  useEffect(() => {
+    
+  }, [])
+
+  
   return (
     <div className="App">
-      <div className="header">
-        <div className="title">Itstagram</div>
-        <div className="navBar">
-          <div>
-            <Link to="/">
-              <img src={home} />
-              Home
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
-              <img src={search} />
-              Search
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
-              {" "}
-              <img src={explore} />
-              Explore
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
-              {" "}
-              <img src={reels} />
-              Reels
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
-              <img src={message} />
-              Messages
-            </Link>
-          </div>
-          <div>
-            <Link to="/">
-              <img src={notification} />
-              Notifications
-            </Link>
-          </div>
-          <div>
-            <Link to="/post">
-              <img src={create} />
-              Create
-            </Link>
-          </div>
-          <div>
-            <Link to="/profile">Profile</Link>
-          </div>
-          <div className="moreWrapper">
-            <div>
-              <div className="moreMenu hidden">
-                <div>Settings</div>
-                <div>Your Activity</div>
-                <div>Saved</div>
-                <div>Switch Appearance</div>
-                <div>Report a problem</div>
-                <div>Switch Accounts</div>
-                <div onClick={signOutGoogle}>Log out</div>
-              </div>
-              <div onClick={showMore}>
-                <img src={more} />
-                More
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <Routes>
-        <Route index element={<Home />} />
-        <Route path="/post" element={<Post />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login signIn={signInGoogle} />} />
+        <Route index path='/' element={<Login signInGoogle={signInGoogle} logInEmail={logInEmail} routeSignup={routeSignup}  />} />
+        <Route path='/login' element={<Login signInGoogle={signInGoogle} logInEmail={logInEmail}  routeSignup={routeSignup}/>} />
+        <Route path="/post" element={<Post signOut={signOutAcc}/>} />
+        <Route path="/profile" element={<Profile signOut={signOutAcc}/>} />
+        <Route path="/home" element={<Home signOut={signOutAcc}/>} />
+        <Route path="/signup" element={<Signup createAcc={createAcc} routeLogin={routeLogin} signInGoogle={signInGoogle}/>} />
       </Routes>
     </div>
   );

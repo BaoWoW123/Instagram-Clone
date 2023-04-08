@@ -1,5 +1,10 @@
 .Post {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 8fr;
   align-items: center;
   justify-content: center;
+}
+
+h1 {
+  text-align: center;
 }

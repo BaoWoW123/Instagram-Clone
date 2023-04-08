@@ -1,8 +1,10 @@
 import "../styles/Post.css";
+import NavBar from "./NavBar";
 
-const Post = () => {
+const Post = (props) => {
   return (
     <div className="Post">
+      <NavBar signOut={props.signOut}/>
       <h1>Post</h1>
     </div>
   );

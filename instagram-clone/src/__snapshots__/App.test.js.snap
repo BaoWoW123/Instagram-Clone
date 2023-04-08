@@ -95,15 +95,42 @@ exports[`App renders component after click event snapshot test 1`] = `
             Profile
           </a>
         </div>
-        <div>
-          <a
-            href="/"
-          >
-            <img
-              src="more.png"
-            />
-            More
-          </a>
+        <div
+          class="moreWrapper"
+        >
+          <div>
+            <div
+              class="moreMenu hidden"
+            >
+              <div>
+                Settings
+              </div>
+              <div>
+                Your Activity
+              </div>
+              <div>
+                Saved
+              </div>
+              <div>
+                Switch Appearance
+              </div>
+              <div>
+                Report a problem
+              </div>
+              <div>
+                Switch Accounts
+              </div>
+              <div>
+                Log out
+              </div>
+            </div>
+            <div>
+              <img
+                src="more.png"
+              />
+              More
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -132,7 +159,6 @@ exports[`App renders component after click event snapshot test 1`] = `
           >
             <div
               class="follower"
-              data-id="0"
             >
               <div
                 class="followerImg"
@@ -147,7 +173,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="1"
             >
               <div
                 class="followerImg"
@@ -162,7 +187,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="2"
             >
               <div
                 class="followerImg"
@@ -177,7 +201,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="3"
             >
               <div
                 class="followerImg"
@@ -192,7 +215,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="4"
             >
               <div
                 class="followerImg"
@@ -207,7 +229,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="5"
             >
               <div
                 class="followerImg"
@@ -222,7 +243,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="6"
             >
               <div
                 class="followerImg"
@@ -237,7 +257,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="7"
             >
               <div
                 class="followerImg"
@@ -252,7 +271,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="8"
             >
               <div
                 class="followerImg"
@@ -267,7 +285,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="9"
             >
               <div
                 class="followerImg"
@@ -282,7 +299,6 @@ exports[`App renders component after click event snapshot test 1`] = `
             </div>
             <div
               class="follower"
-              data-id="10"
             >
               <div
                 class="followerImg"
@@ -377,7 +393,7 @@ exports[`App renders component after click event snapshot test 1`] = `
                 </div>
                 <div>
                   View 
-                  8
+                  5
                    comments
                 </div>
               </div>
@@ -471,7 +487,7 @@ exports[`App renders component after click event snapshot test 1`] = `
                 </div>
                 <div>
                   View 
-                  7
+                  10
                    comments
                 </div>
               </div>
@@ -565,7 +581,7 @@ exports[`App renders component after click event snapshot test 1`] = `
                 </div>
                 <div>
                   View 
-                  9
+                  6
                    comments
                 </div>
               </div>
@@ -592,9 +608,12 @@ exports[`App renders component after click event snapshot test 1`] = `
             class="suggestSwitchAcc"
           >
             <img
+              class="accImg"
               src="rosie.jpg"
             />
-            <div>
+            <div
+              class="rightDivAcc"
+            >
               <div>
                 Account Username
               </div>
