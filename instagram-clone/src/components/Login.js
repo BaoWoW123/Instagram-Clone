@@ -9,9 +9,11 @@ const Login = (props) => {
 
   const logInEmail = (e) => {
     e.preventDefault()
-    const email = document.querySelector('.email').value
-    const pw = document.querySelector('.password').value
-    props.logInEmail(email, pw)
+    if (e.key === 'Enter' || e.type==='click') {
+      const email = document.querySelector('.email').value
+      const pw = document.querySelector('.password').value
+      props.logInEmail(email, pw)
+    }
   }
   
   return (
@@ -27,7 +29,7 @@ const Login = (props) => {
                 className="password"
                 placeholder="Password"
               />
-              <button onClick={showPassword}>Show</button>
+              <button type="button" onClick={showPassword}>Show</button>
             </div>
             <button className="loginBtn" onClick={logInEmail} >
               Log in

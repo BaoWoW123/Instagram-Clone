@@ -3,7 +3,10 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import Home from "./components/Home";
+import { BrowserRouter, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
+import Profile from "./components/Profile";
 
 describe("App renders component after click event", () => {
   test("snapshot test", () => {
@@ -17,19 +20,24 @@ describe("App renders component after click event", () => {
   test("show home page", () => {
     render(
       <BrowserRouter>
-        <App />
+        <Home />
       </BrowserRouter>
     );
     expect(screen.getByLabelText("Home").className).toBe("Home");
   });
-  test("simulate Profile link click", async () => {
+  test("simulate login with fake account", async () => {
+    const submit = jest.fn()
     render(
       <BrowserRouter>
-        <App />
+      <App submit={submit}/>
       </BrowserRouter>
     );
-    const testLink = screen.getByText("Profile", { type: "a" });
-    await userEvent.click(testLink);
-    expect(screen.getByLabelText("Profile").className).toBe("Profile");
+    const emailInput = screen.getByPlaceholderText("Email");
+    const pwInput = screen.getByPlaceholderText('Password')
+    const loginBtn = screen.getByText('Log in')
+    userEvent.type(emailInput, 'test@gmail.com');
+    userEvent.type(pwInput, 'test123');
+    userEvent.click(loginBtn)
+    expect((await screen.findByLabelText('Home')).className).toBe('Home')
   });
 });

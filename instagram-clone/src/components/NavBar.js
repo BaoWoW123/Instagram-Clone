@@ -7,6 +7,7 @@ import notification from "../assets/navBar/notification.png";
 import create from "../assets/navBar/create.png";
 import more from "../assets/navBar/more.png";
 import reels from "../assets/navBar/reels.png";
+import { testImgArr } from "./testImages";
 
 const NavBar = (props) => {
     const showMore = () => {
@@ -68,7 +69,9 @@ const NavBar = (props) => {
             </Link>
           </div>
           <div>
-            <Link to="/profile">Profile</Link>
+            <Link to="/profile">  
+                <img src={testImgArr[3].img} style={{width:'48px', borderRadius:'50%'}}/>
+                Profile</Link>
           </div>
           <div className="moreWrapper">
             <div>

@@ -32,7 +32,6 @@ const App = () => {
   }
   const createAcc = (email, pw) => {
     createUserWithEmailAndPassword(getAuth(), email, pw).then((userInfo) => {
-      //signed in
       console.log('created email acc', userInfo)
       navigate('/home')
     }).catch((error) => {
@@ -52,8 +51,8 @@ const App = () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
     setUser(user = auth)//user resets on restart
-    navigate("/home")
-    setTimeout(function(){updatePage(auth)},1)//delayed updatePage(), can't await navigate()
+    await navigate("/home")
+    setTimeout(function(){updatePage(auth)}, 2)//delayed updatePage(), can't await navigate()
   };
   const signOutAcc = () => {
     const moreMenu = document.querySelector(".moreMenu");
@@ -68,10 +67,8 @@ const App = () => {
     }
   };
 
-  const updatePage = (auth) => {
+  const updatePage = async (auth) => {
     let acc = document.querySelector(".rightDivAcc");
-    let accImg = document.querySelector('.accImg')
-    accImg.src = auth.currentUser.photoURL;
     acc.firstChild.textContent = auth.currentUser.displayName;
     acc.lastChild.textContent = auth.currentUser.email;
   };

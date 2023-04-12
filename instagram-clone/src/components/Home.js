@@ -105,7 +105,7 @@ const Home = (props) => {
       <div className="rightDiv">
         <div>
           <div className="suggestSwitchAcc">
-            <img className="accImg" src={testImgArr[0].img} />
+            <img className="accImg" src={testImgArr[3].img} />
             <div className="rightDivAcc">
               <div>Account Username</div>
               <div>Some username</div>
