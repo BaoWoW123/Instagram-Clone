@@ -1,10 +1,54 @@
-.Post {
+.postPage {
   display: grid;
   grid-template-columns: 1fr 8fr;
-  align-items: center;
   justify-content: center;
 }
 
-h1 {
-  text-align: center;
+.createPost {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  width: 600px;
+  height: 600px;
+  margin: auto;
+}
+
+.createPost span {
+  display: flex;
+  justify-content: center;
+  border-bottom: 2px solid lightgray;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.createPost form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:100%;
+  height: 100%;
+  gap: 10px;
+  box-sizing: border-box;
+  border-radius: 0px 0px 15px 15px;
+}
+.createPost:hover {
+  cursor: default;
+}
+.customUpload {
+  background-color: dodgerblue;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+  border: none;
+  border-radius: 10px;
+}
+
+.createPost button:hover {
+  cursor: pointer;
 }
