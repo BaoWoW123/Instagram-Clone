@@ -15,7 +15,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, db } from "./firebase";
+import { auth, database } from "./firebase";
 
 const App = () => {
 

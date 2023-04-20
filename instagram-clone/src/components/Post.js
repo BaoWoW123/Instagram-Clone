@@ -1,23 +1,43 @@
 import "../styles/Post.css";
 import NavBar from "./NavBar";
-import images from "../assets/navBar/images.png";
+import uploadIcon from "../assets/navBar/images.png";
+import { database } from "../firebase";
+import Cropper from "react-easy-crop";
+import { useState } from "react";
+import { doc, setDoc, collection, getCountFromServer } from "firebase/firestore";
 
+//CAN ONLY POST ONE FILE AT A TIME
 const Post = (props) => {
-  const uploadFile = (e) => { //RUNS TWICE, html overlaps
-    const img = document.querySelector('.imgUpload')
-    img.click()
+  let [crop, setCrop] = useState({ x: 0, y: 0 });
+  let [zoom, setZoom] = useState(1);
+  let [imgCrop, setImgCrop] = useState(null);
+  let [imgPixels, setImgPixels] = useState({});
+
+  const uploadFile = async (e) => {
+    const img = document.querySelector(".imgUpload");
+    img.click();
   };
 
-  const updateFile = () => {
-    console.log('updated files')
-  }
+  const editFile = async (e) => {
+    const img = document.querySelector(".imgUpload");
+    if (img.files.length) {
+      const uploadForm = document.querySelector(".uploadForm");
+      const imgEdit = document.querySelector(".imgEdit");
+      uploadForm.className = "uploadForm hidden";
+      imgEdit.className = "imgEdit";
+      await setImgCrop(URL.createObjectURL(img.files[0]));
+    }
+  };
+
   const dropHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    console.log("file dropped")
     if (e.target.className === "uploadForm") {
-      return (e.target.style.backgroundColor = "white");
+      e.target.style.backgroundColor = "white";
     }
+    const img = document.querySelector(".imgUpload");
+    img.files = e.dataTransfer.files; //input switches files, doesnt add onto files
+    editFile();
   };
 
   const dragEnter = (e) => {
@@ -29,9 +49,59 @@ const Post = (props) => {
   const dragExit = (e) => {
     const div = e.target;
     if (div.className === "uploadForm")
-      return (div.style.backgroundColor = "white");
+      return (div.style.backgroundColor = "transparent");
   };
 
+  const sharePost = async () => {
+    let img = new Image();
+    img.src = imgCrop;
+    const imgEdit = document.querySelector(".imgEdit");
+    const imgEditFinal = document.querySelector(".imgEditFinal");
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+    const captionInput = document.querySelector(".captionInput").value;
+
+    imgEdit.className = "imgEdit hidden";
+    imgEditFinal.className = "imgEditFinal";
+
+    await ctx.drawImage(
+      img,
+      imgPixels.x, imgPixels.y, //START OF X, Y (Y is opposite)
+      imgPixels.width, imgPixels.height, // EXPANDS TO RIGHT X AMOUNT, DOWN Y AMOUNT
+      0, 0, // WHERE TO PLACE CROP
+      300, 300
+    );
+
+    const canvasURL = canvas.toDataURL();
+    const postsRef = collection(database, 'users', 'testUser1', 'posts')
+    const snapshot = await getCountFromServer(postsRef)
+    const postsCount = `${snapshot.data().count + 1}`
+    await setDoc(doc(database, 'users', 'testUser1', 'posts', `post${postsCount}`),{ //TEST USER INPUT, NOT DYNAMIC
+        postImg: canvasURL,
+        caption: captionInput,
+        date: new Date().toLocaleDateString(),
+      },
+      { merge: true }
+    )
+      console.log(collection(database, 'users', 'testUser1', 'posts'))
+  };
+
+  const onCropComplete = (croppedArea, cropperAreaPx) => {
+    setImgPixels(cropperAreaPx);
+  };
+
+  const resetPostPage = () => {
+    setCrop({ x: 0, y: 0 });
+    setZoom(1);
+    setImgCrop(null);
+    setImgPixels({});
+    const imgEditFinal = document.querySelector(".imgEditFinal");
+    const uploadForm = document.querySelector(".uploadForm");
+    const captionInput = document.querySelector(".captionInput");
+    captionInput.value = "";
+    uploadForm.className = "uploadForm";
+    imgEditFinal.className = "imgEditFinal hidden";
+  };
   return (
     <div className="postPage" aria-label="postPage">
       <NavBar signOut={props.signOut} />
@@ -45,25 +115,54 @@ const Post = (props) => {
             e.preventDefault();
             e.stopPropagation();
           }}
-          onChange={(e)=> {e.preventDefault()}}
+          onChange={(e) => {
+            e.preventDefault();
+          }}
           className="uploadForm"
         >
-          <img src={images} className="uploadImg" />
+          <img src={uploadIcon} className="uploadImg" />
           Drag photos and videos here
-          <button
-            className="customUpload"
-            type='button'
-            onClick={uploadFile}
-            >
+          <button className="customUpload" type="button" onClick={uploadFile}>
             Select from your computer
-            <input
-              type="file"
-              className="imgUpload"
-              onChange={updateFile}
-              style={{ display: "none" }}
-            />
           </button>
+          <input
+            type="file"
+            className="imgUpload"
+            onChange={editFile}
+            style={{ display: "none" }}
+            accept="image/*"
+          />
         </form>
+        <div className="imgEdit hidden">
+          <div className="imgPreviewWrapper">
+            <Cropper
+              image={imgCrop}
+              crop={crop}
+              zoom={zoom}
+              aspect={1}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+            />
+          </div>
+          <div>
+            <textarea
+              className="captionInput"
+              placeholder="Write your caption here..."
+              maxLength="100"
+            />
+            <button type="button" className="postBtn" onClick={sharePost}>
+              Share
+            </button>
+          </div>
+        </div>
+        <div className="imgEditFinal hidden">
+          <span>Post shared!</span>
+          <canvas width={300} height={300}></canvas>
+          <button type="button" onClick={resetPostPage}>
+            Create another post
+          </button>
+        </div>
       </div>
     </div>
   );

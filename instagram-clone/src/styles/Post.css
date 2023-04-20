@@ -13,6 +13,9 @@
   width: 600px;
   height: 600px;
   margin: auto;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .createPost span {
@@ -51,4 +54,106 @@
 
 .createPost button:hover {
   cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+.imgPreviewWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  height: 80%;
+  border-bottom: 2px solid lightgray;
+  position: relative;
+}
+
+.imgEdit {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
+}
+.imgEdit>:last-child {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  flex-grow: 1;
+}
+.captionInput {
+  width: 75%;
+  height: 100%;
+  margin-bottom: auto;
+  border: none;
+  font-size: 20px;
+  margin-top: 5px;
+  resize: none;
+}
+
+.postBtn {
+  border: none;
+  background-color: transparent;
+  font-size: 20px;
+  font-weight: bold;
+  color: dodgerblue;
+  padding: 5px;
+  opacity: .8;
+}
+.postBtn:hover {
+  opacity: 1;
+}
+
+.imgEditFinal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  font-weight: bold;
+  position: relative;
+}
+.imgEditFinal span {
+  position: absolute;
+  top: 40px;
+  animation-name: textJump;
+  animation-duration: .4s;
+  border-bottom: none;
+}
+.imgEditFinal button {
+  border: none;
+  background-color: dodgerblue;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-weight: bold;
+  font-size: 20px;
+  bottom: 50px;
+  position: absolute;
+}
+.imgEditFinal canvas {
+  background: linear-gradient(45deg, yellow, red, purple);
+  border-radius: 2%;
+  padding: 4px;
+}
+@keyframes textJump {
+  0% {
+    font-size: 15px;
+  }
+  50%{
+    font-size: 35px;
+  }
+  100% {
+    font-size:30px;
+  }
 }
