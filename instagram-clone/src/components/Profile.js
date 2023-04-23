@@ -1,7 +1,7 @@
 import "../styles/Profile.css";
 import NavBar from "./NavBar";
-import likes from '../assets/navBar/likes.png'
-import comment from '../assets/navBar/comment.png'
+import likes from "../assets/navBar/likes.png";
+import comment from "../assets/navBar/comment.png";
 import { testImgArr } from "./testImages";
 
 const Profile = (props) => {
@@ -47,10 +47,14 @@ const Profile = (props) => {
             {testImgArr.map((el, i) => {
               return (
                 <div className="userPost" key={i}>
-                  <img src={el.img}/>
+                  <img src={el.img} />
                   <div className="userPostInfo">
-                    <div style={{display:'flex', alignItems:'center'}}><img src={likes}/> {i+1}</div>
-                    <div style={{display:'flex', alignItems:'center'}}><img src={comment}/> {i +3}</div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <img src={likes} /> {i + 1}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <img src={comment} /> {i + 3}
+                    </div>
                   </div>
                 </div>
               );

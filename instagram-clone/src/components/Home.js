@@ -1,14 +1,16 @@
 import "../styles/Home.css";
 import { testImgArr, testPostArr } from "./testImages";
-import post from "../assets/navBar/post.png";
-import bookmark from "../assets/navBar/bookmark.png";
-import send from "../assets/navBar/send.png";
-import postmessage from "../assets/navBar/postmessage.png";
-import like from "../assets/navBar/heart.png";
 import NavBar from "./NavBar";
+import { useEffect, useState } from "react";
+import { auth, database } from "../firebase";
+import { collection, getDocs, query } from "firebase/firestore";
+import PostList from "./PostList";
+import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
-    
+  const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
+
   const showNext = () => {
     const followers = document.querySelectorAll(".follower");
     followers.forEach((el) => {
@@ -31,9 +33,42 @@ const Home = (props) => {
     prevBtn.className = "storiesPrevBtn hidden";
   };
 
+  const getFeed = async () => {
+    //const followersRef = collection(database ,'users', 'testUser1', 'followers')
+    const followerId = "testUser2";
+    const postsRef = collection(database, "users", followerId, "posts");
+    const postsQ = query(postsRef);
+    const postsQSnap = await getDocs(postsQ);
+    const tempPostArr = [];
+    postsQSnap.forEach((doc) => {
+      tempPostArr.unshift(doc.data());
+    });
+    await setPosts(tempPostArr);
+    try {
+    } catch (error) {
+      console.log("error displaying feed", error);
+    }
+  };
+
+  useEffect(() => {
+    //IMPORTANT: Tests can't run with hook active
+    getFeed();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      props.setUser(user);
+    });
+    return unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    //goes to login page if no user found
+    if (!props.user) {
+      navigate("/");
+    }
+  }, [props.user]);
+
   return (
     <div className="Home" aria-label="Home">
-      <NavBar signOut={props.signOut}/>
+      <NavBar signOut={props.signOut} />
       <div className="feed">
         <div className="storiesContainer">
           <button className="storiesNextBtn" onClick={showNext}>
@@ -55,60 +90,18 @@ const Home = (props) => {
             })}
           </div>
         </div>
-        <div className="posts">
-          {testPostArr.map((el, i) => {
-            return (
-              <div className="post" key={i}>
-                <div>
-                  <div className="postInfo">
-                    <img src={el.img} />
-                    <div style={{ fontWeight: "bold" }}>{el.username}</div>
-                  </div>
-                  <img src={post} />
-                </div>
-                <img src={el.post} />
-                <div className="postDescrip">
-                  <div className="postNavBar">
-                    <div>
-                      <img src={like} />
-                      <img src={postmessage} />
-                      <img src={send} />
-                    </div>
-                    <div>Nav Dots here</div>
-                    <div>
-                      <img src={bookmark} />
-                    </div>
-                  </div>
-                  <div className="postLikes">
-                    <div>Images</div>
-                    <div>
-                      Like by <b>username</b> and <b>others</b>
-                    </div>
-                  </div>
-                  <div className="postCaption">
-                    <div>
-                      <b>{el.username}</b> Some captions here and there or maybe
-                      everywhere
-                    </div>
-                    <div>View {Math.ceil(Math.random() * 10)} comments</div>
-                  </div>
-                  <div className="postComment">
-                    <input type="text" placeholder="Add a comment..."></input>
-                    <button>Post</button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        <PostList posts={posts} />
       </div>
       <div className="rightDiv">
         <div>
           <div className="suggestSwitchAcc">
-            <img className="accImg" src={testImgArr[3].img} />
+            <img
+              className="accImg"
+              src={props.user ? props.user.photoURL : ""}
+            />
             <div className="rightDivAcc">
-              <div>Account Username</div>
-              <div>Some username</div>
+              <div>{props.user ? props.user.displayName : "display name"}</div>
+              <div>{props.user ? props.user.email : "display username"}</div>
             </div>
           </div>
           <button>Switch</button>

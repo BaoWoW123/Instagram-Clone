@@ -4,7 +4,12 @@ import uploadIcon from "../assets/navBar/images.png";
 import { database } from "../firebase";
 import Cropper from "react-easy-crop";
 import { useState } from "react";
-import { doc, setDoc, collection, getCountFromServer } from "firebase/firestore";
+import {
+  doc,
+  setDoc,
+  collection,
+  getCountFromServer,
+} from "firebase/firestore";
 
 //CAN ONLY POST ONE FILE AT A TIME
 const Post = (props) => {
@@ -66,24 +71,31 @@ const Post = (props) => {
 
     await ctx.drawImage(
       img,
-      imgPixels.x, imgPixels.y, //START OF X, Y (Y is opposite)
-      imgPixels.width, imgPixels.height, // EXPANDS TO RIGHT X AMOUNT, DOWN Y AMOUNT
-      0, 0, // WHERE TO PLACE CROP
-      300, 300
+      imgPixels.x,
+      imgPixels.y, //START OF X, Y (Y is opposite)
+      imgPixels.width,
+      imgPixels.height, // EXPANDS TO RIGHT X AMOUNT, DOWN Y AMOUNT
+      0,
+      0, // WHERE TO PLACE CROP
+      600,
+      400
     );
 
     const canvasURL = canvas.toDataURL();
-    const postsRef = collection(database, 'users', 'testUser1', 'posts')
-    const snapshot = await getCountFromServer(postsRef)
-    const postsCount = `${snapshot.data().count + 1}`
-    await setDoc(doc(database, 'users', 'testUser1', 'posts', `post${postsCount}`),{ //TEST USER INPUT, NOT DYNAMIC
+    const postsRef = collection(database, "users", "testUser2", "posts");
+    const snapshot = await getCountFromServer(postsRef);
+    const postsCount = `${snapshot.data().count + 1}`;
+    await setDoc(
+      doc(database, "users", "testUser2", "posts", `post${postsCount}`),
+      {
+        //TEST USER INPUT, NOT DYNAMIC
         postImg: canvasURL,
         caption: captionInput,
         date: new Date().toLocaleDateString(),
       },
       { merge: true }
-    )
-      console.log(collection(database, 'users', 'testUser1', 'posts'))
+    );
+    console.log(collection(database, "users", "testUser1", "posts"));
   };
 
   const onCropComplete = (croppedArea, cropperAreaPx) => {
@@ -139,7 +151,7 @@ const Post = (props) => {
               image={imgCrop}
               crop={crop}
               zoom={zoom}
-              aspect={1}
+              aspect={4 / 3}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
               onZoomChange={setZoom}
@@ -158,7 +170,7 @@ const Post = (props) => {
         </div>
         <div className="imgEditFinal hidden">
           <span>Post shared!</span>
-          <canvas width={300} height={300}></canvas>
+          <canvas width={600} height={400}></canvas>
           <button type="button" onClick={resetPostPage}>
             Create another post
           </button>

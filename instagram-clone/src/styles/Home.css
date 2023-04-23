@@ -106,6 +106,7 @@
 
 .postInfo {
   display: flex;
+  align-items: center;
 }
 
 .postInfo > :last-child {
@@ -142,77 +143,77 @@
 }
 
 .postDescrip {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
 }
 
 .postNavBar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr) ;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding: 10px 0px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  padding: 10px 0px;
 }
 
-.postNavBar>:first-child {
-    display: flex;
-    padding-left: 10px;
-    gap: 10px;
+.postNavBar > :first-child {
+  display: flex;
+  padding-left: 10px;
+  gap: 10px;
 }
 
-.postNavBar>:last-child {
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 10px;
+.postNavBar > :last-child {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 10px;
 }
 
 .postLikes {
-    display: flex;
-    gap:10px;
-    padding-left:15px;
+  display: flex;
+  gap: 10px;
+  padding-left: 15px;
 }
 
 .postCaption {
-    padding:10px 15px;
+  padding: 10px 15px;
 }
 
 .postComment {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgb(0, 0, 0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgb(0, 0, 0, 0.5);
 }
 
 .postComment > input {
-    border: none;
-    font-size: 20px;
-    background-color: transparent;
-    font-weight: bold;
+  border: none;
+  font-size: 20px;
+  background-color: transparent;
+  font-weight: bold;
 }
-.postComment> input::placeholder {
-    color: rgb(0, 0, 0,0.4);
+.postComment > input::placeholder {
+  color: rgb(0, 0, 0, 0.4);
 }
 input:focus {
-    outline: none;
+  outline: none;
 }
-.postComment>* {
-    padding: 20px;
+.postComment > * {
+  padding: 20px;
 }
 
-.postComment > *:hover{
-    opacity: 1;
+.postComment > *:hover {
+  opacity: 1;
 }
 
 .postComment button {
-    background-color: transparent;
-    border: none;
-    font-size: 20px;
-    color: dodgerblue;
-    font-weight: bold;
-    opacity: .4;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  color: dodgerblue;
+  font-weight: bold;
+  opacity: 0.4;
 }
 /* RIGHT DIV */
 .rightDiv {
