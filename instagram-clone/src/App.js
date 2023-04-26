@@ -16,10 +16,11 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth, database } from "./firebase";
-import { doc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 const App = () => {
   let [user, setUser] = useState({});
+  let [userInfo, setUserInfo] = useState({});
   const navigate = useNavigate();
 
   const logInEmail = (email, pw) => {
@@ -69,6 +70,7 @@ const App = () => {
     const provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
     setUser(auth.currentUser);
+    getUserInfo(auth.currentUser);
     localStorage.setItem("user", JSON.stringify(auth.currentUser)); //only for google sign in
     navigate("/home", {}, () => {
       updatePage();
@@ -89,6 +91,11 @@ const App = () => {
     }
   };
 
+  const getUserInfo = async (user) => {
+    const userRef = doc(database, "users", `${user.uid}`);
+    const userData = (await getDoc(userRef)).data();
+    setUserInfo(userData);
+  };
   const updatePage = async () => {};
 
   const firebaseAuth = () => {
@@ -101,6 +108,7 @@ const App = () => {
     });
     return unsubscribe();
   });
+
   useEffect(() => {
     const storedUser = localStorage.getItem("user"); //sets user based on local storage item
     if (storedUser) {
@@ -132,11 +140,32 @@ const App = () => {
             />
           }
         />
-        <Route path="/post" element={<Post signOut={signOutAcc} />} />
-        <Route path="/profile" element={<Profile signOut={signOutAcc} />} />
+        <Route
+          path="/post"
+          element={<Post signOut={signOutAcc} userInfo={userInfo} />}
+        />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              signOut={signOutAcc}
+              setUser={setUser}
+              user={user}
+              userInfo={userInfo}
+              getUserInfo={getUserInfo}
+            />
+          }
+        />
         <Route
           path="/home"
-          element={<Home signOut={signOutAcc} user={user} setUser={setUser} />}
+          element={
+            <Home
+              signOut={signOutAcc}
+              user={user}
+              setUser={setUser}
+              userInfo={userInfo}
+            />
+          }
         />
         <Route
           path="/signup"

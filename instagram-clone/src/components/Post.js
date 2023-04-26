@@ -9,6 +9,7 @@ import {
   setDoc,
   collection,
   getCountFromServer,
+  getDoc,
 } from "firebase/firestore";
 
 //CAN ONLY POST ONE FILE AT A TIME
@@ -78,24 +79,31 @@ const Post = (props) => {
       0,
       0, // WHERE TO PLACE CROP
       600,
-      400
+      450
     );
 
     const canvasURL = canvas.toDataURL();
     const postsRef = collection(database, "users", "testUser2", "posts");
     const snapshot = await getCountFromServer(postsRef);
     const postsCount = `${snapshot.data().count + 1}`;
+
     await setDoc(
       doc(database, "users", "testUser2", "posts", `post${postsCount}`),
       {
         //TEST USER INPUT, NOT DYNAMIC
         postImg: canvasURL,
         caption: captionInput,
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleTimeString([], {
+          year:'numeric',
+          month:'2-digit',
+          day:'2-digit',
+          hour:'2-digit',
+          minute:'2-digit',
+        }),
+        id: 'testUser2',
       },
       { merge: true }
     );
-    console.log(collection(database, "users", "testUser1", "posts"));
   };
 
   const onCropComplete = (croppedArea, cropperAreaPx) => {
@@ -116,7 +124,7 @@ const Post = (props) => {
   };
   return (
     <div className="postPage" aria-label="postPage">
-      <NavBar signOut={props.signOut} />
+      <NavBar signOut={props.signOut} userInfo = {props.userInfo}/>
       <div className="createPost">
         <span>Create new post</span>
         <form
@@ -170,7 +178,7 @@ const Post = (props) => {
         </div>
         <div className="imgEditFinal hidden">
           <span>Post shared!</span>
-          <canvas width={600} height={400}></canvas>
+          <canvas width={600} height={450}></canvas>
           <button type="button" onClick={resetPostPage}>
             Create another post
           </button>

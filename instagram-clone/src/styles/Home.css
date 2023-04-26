@@ -34,10 +34,6 @@
   position: relative;
 }
 
-.hidden {
-  display: none;
-}
-
 .storiesWrapper > :first-child {
   padding-left: 10px;
 }

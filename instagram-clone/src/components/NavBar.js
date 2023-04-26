@@ -8,6 +8,7 @@ import create from "../assets/navBar/create.png";
 import more from "../assets/navBar/more.png";
 import reels from "../assets/navBar/reels.png";
 import { testImgArr } from "./testImages";
+import { useEffect } from "react";
 
 const NavBar = (props) => {
     const showMore = () => {
@@ -20,6 +21,7 @@ const NavBar = (props) => {
           moreMenu.style.backgroundColor = "none";
         }
       };
+
     return (
         <div className="header">
         <div className="title">Itstagram</div>
@@ -70,7 +72,7 @@ const NavBar = (props) => {
           </div>
           <div>
             <Link to="/profile">  
-                <img src={testImgArr[3].img} style={{width:'48px', borderRadius:'50%'}}/>
+                <img src={(props.userInfo) ? props.userInfo.profileImg : testImgArr[3].img} style={{width:'48px', height:'48px', borderRadius:'50%'}}/>
                 Profile</Link>
           </div>
           <div className="moreWrapper">

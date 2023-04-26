@@ -3,12 +3,20 @@ import { testImgArr, testPostArr } from "./testImages";
 import NavBar from "./NavBar";
 import { useEffect, useState } from "react";
 import { auth, database } from "../firebase";
-import { collection, getDocs, query } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import PostList from "./PostList";
 import { useNavigate } from "react-router-dom";
 
 const Home = (props) => {
-  const [posts, setPosts] = useState([]);
+  let [posts, setPosts] = useState([]);
   const navigate = useNavigate();
 
   const showNext = () => {
@@ -34,17 +42,38 @@ const Home = (props) => {
   };
 
   const getFeed = async () => {
-    //const followersRef = collection(database ,'users', 'testUser1', 'followers')
-    const followerId = "testUser2";
-    const postsRef = collection(database, "users", followerId, "posts");
-    const postsQ = query(postsRef);
-    const postsQSnap = await getDocs(postsQ);
-    const tempPostArr = [];
-    postsQSnap.forEach((doc) => {
-      tempPostArr.unshift(doc.data());
-    });
-    await setPosts(tempPostArr);
+    const userId = props.user.uid;
+    const userRef = doc(database, "users", `${userId}`);
+    let followersPostsArr = [];
+    let followersArray = [];
+    const userDoc = (await getDoc(userRef)).data();
+
+    //if user has no followers, add test followers
+    if (!userDoc) {
+      return alert(
+        "Error loading feed.This usually occurs when refreshing. Please relog in again"
+      );
+    } else if (userDoc.followersArr == undefined) {
+      updateDoc(userRef, {
+        followersArr: ["testUser1", "testUser2"],
+      });
+      console.log("added fake followers", userDoc);
+    }
+
+    followersArray = userDoc.followersArr;
+    //loop over followers and their posts
+    for (let i = 0; i < followersArray.length; i++) {
+      let followerPostsRef = doc(database, "users", followersArray[i]);
+      let postsRef = collection(followerPostsRef, "posts");
+      let followerPosts = await getDocs(postsRef);
+
+      followerPosts.docs.forEach((doc) => {
+        followersPostsArr.push(doc.data());
+      });
+    }
+    followersPostsArr.sort((a, b) => new Date(b.date) - new Date(a.date));
     try {
+      setPosts(followersPostsArr);
     } catch (error) {
       console.log("error displaying feed", error);
     }
@@ -52,10 +81,10 @@ const Home = (props) => {
 
   useEffect(() => {
     //IMPORTANT: Tests can't run with hook active
-    getFeed();
     const unsubscribe = auth.onAuthStateChanged((user) => {
       props.setUser(user);
     });
+
     return unsubscribe();
   }, []);
 
@@ -64,11 +93,12 @@ const Home = (props) => {
     if (!props.user) {
       navigate("/");
     }
-  }, [props.user]);
+    getFeed();
+  }, []);
 
   return (
     <div className="Home" aria-label="Home">
-      <NavBar signOut={props.signOut} />
+      <NavBar signOut={props.signOut} userInfo={props.userInfo} />
       <div className="feed">
         <div className="storiesContainer">
           <button className="storiesNextBtn" onClick={showNext}>
@@ -90,18 +120,24 @@ const Home = (props) => {
             })}
           </div>
         </div>
-        <PostList posts={posts} />
+        <PostList posts={posts} userInfo={props.userInfo} />
       </div>
       <div className="rightDiv">
         <div>
           <div className="suggestSwitchAcc">
             <img
               className="accImg"
-              src={props.user ? props.user.photoURL : ""}
+              src={props.userInfo ? props.userInfo.profileImg : ""}
+              width={70}
+              height={70}
             />
             <div className="rightDivAcc">
               <div>{props.user ? props.user.displayName : "display name"}</div>
-              <div>{props.user ? props.user.email : "display username"}</div>
+              <div>
+                {props.userInfo
+                  ? `@${props.userInfo.username}`
+                  : "display username"}
+              </div>
             </div>
           </div>
           <button>Switch</button>
