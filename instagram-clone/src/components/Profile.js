@@ -18,12 +18,12 @@ const Profile = (props) => {
   const showProfilePopup = (e) => {
     console.log("popup");
     const profilePopupWrapper = document.querySelector(".profilePopupWrapper");
-    const profilePopupOptions = document.querySelector('.profilePopupOptions')
+    const profilePopupOptions = document.querySelector(".profilePopupOptions");
     if (profilePopupWrapper.className === "profilePopupWrapper") {
       profilePopupWrapper.className = "profilePopupWrapper hidden";
     } else {
       profilePopupWrapper.className = "profilePopupWrapper";
-      profilePopupOptions.className = 'profilePopupOptions'
+      profilePopupOptions.className = "profilePopupOptions";
     }
   };
 
@@ -34,46 +34,47 @@ const Profile = (props) => {
     imgInput.click();
   };
 
-  const updateProfileImg =  async () => {
+  const updateProfileImg = async () => {
     const profilePopupOptions = document.querySelector(".profilePopupOptions");
-    const profileImgUpload = document.querySelector('.profileImgUpload')
-    const cropper = document.querySelector('.profileImgCropperWrapper')
-    cropper.className = 'profileImgCropperWrapper'
+    const profileImgUpload = document.querySelector(".profileImgUpload");
+    const cropper = document.querySelector(".profileImgCropperWrapper");
+    cropper.className = "profileImgCropperWrapper";
     profilePopupOptions.className = "profilePopupOptions hidden";
     console.log("img selected");
     if (profileImgUpload.files.length) {
-      await setProfileImgCrop(URL.createObjectURL(profileImgUpload.files[0]))
+      await setProfileImgCrop(URL.createObjectURL(profileImgUpload.files[0]));
     }
-
   };
 
-   const createProfileImg = async () => {
+  const createProfileImg = async () => {
     let img = new Image();
     const canvas = document.querySelector(".profileCanvas");
     const ctx = canvas.getContext("2d");
-    const profilePopupWrapper = document.querySelector('.profilePopupWrapper')
-    const profileImgCropperWrapper = document.querySelector('.profileImgCropperWrapper') 
+    const profilePopupWrapper = document.querySelector(".profilePopupWrapper");
+    const profileImgCropperWrapper = document.querySelector(
+      ".profileImgCropperWrapper"
+    );
 
     img.src = profileImgCrop;
     profilePopupWrapper.className = "profilePopupWrapper hidden";
-    profileImgCropperWrapper.className = 'profileImgCropperWrapper hidden'; 
-
+    profileImgCropperWrapper.className = "profileImgCropperWrapper hidden";
 
     await ctx.drawImage(
       img,
       profileImgPixels.x, profileImgPixels.y,
       profileImgPixels.width, profileImgPixels.height,
-      0,0,
-      300,
-      150
+      0, 0,
+      300, 150
     );
-    
-    const canvasURL = canvas.toDataURL('image/png');
-    setProfileImgCrop(canvasURL)
+
+    const canvasURL = canvas.toDataURL("image/png");
+    setProfileImgCrop(canvasURL);
     await setDoc(
-      doc(database, "users", props.user.uid), {profileImg: canvasURL}
+      doc(database, "users", props.user.uid),
+      { profileImg: canvasURL },
+      { merge: true }
     );
-    props.getUserInfo(auth.currentUser)
+    props.getUserInfo(auth.currentUser);
   };
   const onCropComplete = (croppedArea, cropperAreaPx) => {
     setProfileImgPixels(cropperAreaPx);
@@ -85,20 +86,20 @@ const Profile = (props) => {
     });
 
     return unsubscribe();
-  }, [])
+  }, []);
 
   return (
     <div className="profilePage" aria-label="Profile">
-      <NavBar signOut={props.signOut} userInfo = {props.userInfo}/>
+      <NavBar signOut={props.signOut} userInfo={props.userInfo} />
       <div className="profile">
         <div className="profilePopupWrapper hidden">
           <span className="profilePopup">
             <div className="profilePopupOptions">
-            <div>
-              <h2>Change profile image</h2>
-            </div>
-            <div onClick={selectProfileImg}>Upload image</div>
-            <div onClick={showProfilePopup}>Cancel</div>
+              <div>
+                <h2>Change profile image</h2>
+              </div>
+              <div onClick={selectProfileImg}>Upload image</div>
+              <div onClick={showProfilePopup}>Cancel</div>
             </div>
             <input
               type="file"
@@ -106,10 +107,10 @@ const Profile = (props) => {
               onChange={updateProfileImg}
               style={{ display: "none" }}
               accept="image/*"
-            />        
+            />
           </span>
           <div className="profileImgCropperWrapper hidden">
-              <div>
+            <div>
               <Cropper
                 image={profileImgCrop}
                 crop={crop}
@@ -118,18 +119,20 @@ const Profile = (props) => {
                 onCropChange={setCrop}
                 onCropComplete={onCropComplete}
                 onZoomChange={setZoom}
-                cropShape='round'
+                cropShape="round"
               />
-              </div>
-              <button type="button" onClick={createProfileImg}>Save</button>
-              <canvas className="profileCanvas hidden"></canvas>
             </div>
+            <button type="button" onClick={createProfileImg}>
+              Save
+            </button>
+            <canvas className="profileCanvas hidden"></canvas>
+          </div>
         </div>
         <div className="topProfile">
           <img
             src={props.userInfo ? props.userInfo.profileImg : testImgArr[3].img}
             onClick={showProfilePopup}
-            style={{position:'top'}}
+            style={{ position: "top" }}
           />
           <div className="profileInfo">
             <div>

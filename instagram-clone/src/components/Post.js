@@ -72,35 +72,32 @@ const Post = (props) => {
 
     await ctx.drawImage(
       img,
-      imgPixels.x,
-      imgPixels.y, //START OF X, Y (Y is opposite)
-      imgPixels.width,
-      imgPixels.height, // EXPANDS TO RIGHT X AMOUNT, DOWN Y AMOUNT
-      0,
-      0, // WHERE TO PLACE CROP
-      600,
-      450
+      imgPixels.x, imgPixels.y, //START OF X, Y (Y is opposite)
+      imgPixels.width, imgPixels.height, // EXPANDS TO RIGHT X AMOUNT, DOWN Y AMOUNT
+      0, 0, // WHERE TO PLACE CROP
+      600, 450
     );
 
     const canvasURL = canvas.toDataURL();
-    const postsRef = collection(database, "users", "testUser2", "posts");
+    const postsRef = collection(database, "users", "testUser1", "posts"); //UPDATE test user to uid
     const snapshot = await getCountFromServer(postsRef);
     const postsCount = `${snapshot.data().count + 1}`;
 
     await setDoc(
-      doc(database, "users", "testUser2", "posts", `post${postsCount}`),
+      doc(database, "users", "testUser1", "posts", `post${postsCount}`),
       {
         //TEST USER INPUT, NOT DYNAMIC
+        postId: `post${postsCount}`,
         postImg: canvasURL,
         caption: captionInput,
         date: new Date().toLocaleTimeString([], {
-          year:'numeric',
-          month:'2-digit',
-          day:'2-digit',
-          hour:'2-digit',
-          minute:'2-digit',
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
         }),
-        id: 'testUser2',
+        id: "testUser1",
       },
       { merge: true }
     );
@@ -124,7 +121,7 @@ const Post = (props) => {
   };
   return (
     <div className="postPage" aria-label="postPage">
-      <NavBar signOut={props.signOut} userInfo = {props.userInfo}/>
+      <NavBar signOut={props.signOut} userInfo={props.userInfo} />
       <div className="createPost">
         <span>Create new post</span>
         <form

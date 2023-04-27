@@ -63,15 +63,16 @@ const Home = (props) => {
     followersArray = userDoc.followersArr;
     //loop over followers and their posts
     for (let i = 0; i < followersArray.length; i++) {
-      let followerPostsRef = doc(database, "users", followersArray[i]);
-      let postsRef = collection(followerPostsRef, "posts");
+      let followerRef = doc(database, "users", followersArray[i]);
+      let postsRef = collection(followerRef, "posts");
       let followerPosts = await getDocs(postsRef);
+      let followerInfo = (await getDoc(followerRef)).data()
 
       followerPosts.docs.forEach((doc) => {
-        followersPostsArr.push(doc.data());
+        followersPostsArr.push({post: doc.data(), user: followerInfo });
       });
     }
-    followersPostsArr.sort((a, b) => new Date(b.date) - new Date(a.date));
+    followersPostsArr.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
     try {
       setPosts(followersPostsArr);
     } catch (error) {
