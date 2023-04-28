@@ -211,6 +211,16 @@ input:focus {
   font-weight: bold;
   opacity: 0.4;
 }
+
+.viewComment {
+  color:gray;
+  display: inline-block;
+  
+}
+.viewComment:hover {
+  cursor: pointer;
+  color: black;
+} 
 /* RIGHT DIV */
 .rightDiv {
   display: flex;

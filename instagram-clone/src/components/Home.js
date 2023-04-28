@@ -66,13 +66,32 @@ const Home = (props) => {
       let followerRef = doc(database, "users", followersArray[i]);
       let postsRef = collection(followerRef, "posts");
       let followerPosts = await getDocs(postsRef);
-      let followerInfo = (await getDoc(followerRef)).data()
+      let followerInfo = (await getDoc(followerRef)).data();
 
-      followerPosts.docs.forEach((doc) => {
-        followersPostsArr.push({post: doc.data(), user: followerInfo });
+      followerPosts.docs.forEach(async (post) => {
+        let commentsRef = collection(doc(postsRef, `${post.id}`), "comments");
+        let commentsData = (await getDocs(commentsRef)).docs;
+        let commentArr = [];
+
+        if (commentsData.length) {
+          commentsData.forEach(async (comment) => {
+            let commentData = (
+              await getDoc(doc(commentsRef, `${comment.id}`))
+            ).data();
+            commentArr.push(commentData);
+          });
+        }
+
+        followersPostsArr.push({
+          post: post.data(),
+          user: followerInfo,
+          commentsData: commentArr,
+        });
       });
     }
-    followersPostsArr.sort((a, b) => new Date(b.post.date) - new Date(a.post.date));
+    followersPostsArr.sort(
+      (a, b) => new Date(b.post.date) - new Date(a.post.date)
+    );
     try {
       setPosts(followersPostsArr);
     } catch (error) {

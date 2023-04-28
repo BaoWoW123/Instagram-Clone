@@ -18,7 +18,7 @@ const PostList = ({ posts, userInfo }) => {
     const postRef = doc(postsRef, post.post.postId);
     const commentsRef = collection(postRef, "comments");
     const commentInput = e.target.parentNode.firstChild;
-    
+
     const commentData = {
       comment: commentInput.value,
       commentBy: userInfo.username,
@@ -30,9 +30,13 @@ const PostList = ({ posts, userInfo }) => {
         minute: "2-digit",
       }),
     };
-    
+
     await addDoc(commentsRef, commentData);
     commentInput.value = "";
+  };
+
+  const viewPost = () => {
+    console.log("view post click event");
   };
 
   useEffect(() => {
@@ -91,7 +95,17 @@ const PostList = ({ posts, userInfo }) => {
                     <div>
                       <b>@{post.user.username}</b> {post.post.caption}
                     </div>
-                    <div>View {Math.ceil(Math.random() * 10)} comments</div>
+                    {post.commentsData.length ? (
+                      <div className="viewComment" onClick={viewPost}>
+                        {post.commentsData.length >= 2 ? (
+                          <>View all {post.commentsData.length} comments</>
+                        ) : (
+                          <>View one comment</>
+                        )}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div className="postComment">
                     <input type="text" placeholder="Add a comment..."></input>
