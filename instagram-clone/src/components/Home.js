@@ -57,46 +57,46 @@ const Home = (props) => {
       updateDoc(userRef, {
         followersArr: ["testUser1", "testUser2"],
       });
-      console.log("added fake followers", userDoc);
-    }
+      followersArray = ["testUser1", "testUser2"];
+      console.log("added fake followers");
+    } else followersArray = userDoc.followersArr;
 
-    followersArray = userDoc.followersArr;
-    //loop over followers and their posts
+    //loop over followers, their posts, and comments
     for (let i = 0; i < followersArray.length; i++) {
       let followerRef = doc(database, "users", followersArray[i]);
       let postsRef = collection(followerRef, "posts");
       let followerPosts = await getDocs(postsRef);
       let followerInfo = (await getDoc(followerRef)).data();
 
-      followerPosts.docs.forEach(async (post) => {
-        let commentsRef = collection(doc(postsRef, `${post.id}`), "comments");
-        let commentsData = (await getDocs(commentsRef)).docs;
+      for (const post in followerPosts.docs) {
+        const currentPost = followerPosts.docs[post];
+        const commentsRef = collection(
+          doc(postsRef, `${currentPost.id}`),
+          "comments"
+        );
+        const commentsData = (await getDocs(commentsRef)).docs;
         let commentArr = [];
 
-        if (commentsData.length) {
-          commentsData.forEach(async (comment) => {
-            let commentData = (
-              await getDoc(doc(commentsRef, `${comment.id}`))
+        if (commentsData.length >= 1) {
+          for (const comment in commentsData) {
+            const currentComment = commentsData[comment];
+            const commentData = (
+              await getDoc(doc(commentsRef, `${currentComment.id}`))
             ).data();
             commentArr.push(commentData);
-          });
+          }
         }
-
         followersPostsArr.push({
-          post: post.data(),
+          post: currentPost.data(),
           user: followerInfo,
           commentsData: commentArr,
         });
-      });
+      }
     }
     followersPostsArr.sort(
       (a, b) => new Date(b.post.date) - new Date(a.post.date)
     );
-    try {
-      setPosts(followersPostsArr);
-    } catch (error) {
-      console.log("error displaying feed", error);
-    }
+    setPosts(followersPostsArr);
   };
 
   useEffect(() => {
@@ -104,7 +104,6 @@ const Home = (props) => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       props.setUser(user);
     });
-
     return unsubscribe();
   }, []);
 

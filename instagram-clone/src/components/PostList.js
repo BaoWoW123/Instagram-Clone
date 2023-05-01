@@ -40,7 +40,7 @@ const PostList = ({ posts, userInfo }) => {
   };
 
   useEffect(() => {
-    if (posts) return setLoading(false);
+    if (posts.length >= 1) return setLoading(false);
   }, [posts]);
 
   return (
@@ -56,9 +56,9 @@ const PostList = ({ posts, userInfo }) => {
         </div>
       ) : (
         <div className="posts">
-          {posts.map((post, i) => {
+          {posts.map((post, index) => {
             return (
-              <div className="post" key={i}>
+              <div className="post" key={post.post.postId}>
                 <div>
                   <div className="postInfo">
                     <img
@@ -68,7 +68,7 @@ const PostList = ({ posts, userInfo }) => {
                     <div style={{ fontWeight: "bold" }}>
                       @{post.user.username}
                     </div>
-                    <div>{post.date}</div>
+                    <div>{post.post.date}</div>
                   </div>
                   <img src={postDot} />
                 </div>

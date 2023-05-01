@@ -82,12 +82,12 @@ const Post = (props) => {
     const postsRef = collection(database, "users", "testUser1", "posts"); //UPDATE test user to uid
     const snapshot = await getCountFromServer(postsRef);
     const postsCount = `${snapshot.data().count + 1}`;
-
+    
     await setDoc(
-      doc(database, "users", "testUser1", "posts", `post${postsCount}`),
+      doc(database, "users", "testUser1", "posts", `${postsRef.parent.id}-post${postsCount}`),
       {
         //TEST USER INPUT, NOT DYNAMIC
-        postId: `post${postsCount}`,
+        postId: `${postsRef.parent.id}-post${postsCount}`,
         postImg: canvasURL,
         caption: captionInput,
         date: new Date().toLocaleTimeString([], {
