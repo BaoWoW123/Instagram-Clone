@@ -5,39 +5,10 @@ import postmessage from "../assets/navBar/postmessage.png";
 import like from "../assets/navBar/heart.png";
 import "../styles/Home.css";
 import { useEffect, useState } from "react";
-import { database } from "../firebase";
-import { addDoc, collection, doc } from "firebase/firestore";
 import "../styles/Post.css";
 
-const PostList = ({ posts, userInfo }) => {
+const PostList = ({ posts, viewPost, postComment }) => {
   let [loading, setLoading] = useState(true);
-
-  const postComment = async (e, post) => {
-    const userRef = doc(database, "users", post.post.id);
-    const postsRef = collection(userRef, "posts");
-    const postRef = doc(postsRef, post.post.postId);
-    const commentsRef = collection(postRef, "comments");
-    const commentInput = e.target.parentNode.firstChild;
-
-    const commentData = {
-      comment: commentInput.value,
-      commentBy: userInfo.username,
-      date: new Date().toLocaleTimeString([], {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-
-    await addDoc(commentsRef, commentData);
-    commentInput.value = "";
-  };
-
-  const viewPost = () => {
-    console.log("view post click event");
-  };
 
   useEffect(() => {
     if (posts.length >= 1) return setLoading(false);
@@ -56,7 +27,7 @@ const PostList = ({ posts, userInfo }) => {
         </div>
       ) : (
         <div className="posts">
-          {posts.map((post, index) => {
+          {posts.map((post) => {
             return (
               <div className="post" key={post.post.postId}>
                 <div>
@@ -72,7 +43,7 @@ const PostList = ({ posts, userInfo }) => {
                   </div>
                   <img src={postDot} />
                 </div>
-                <img src={post.post.postImg} />
+                <img src={post.post.postImg} onClick={()=>viewPost(post)}/>
                 <div className="postDescrip">
                   <div className="postNavBar">
                     <div>
@@ -96,7 +67,7 @@ const PostList = ({ posts, userInfo }) => {
                       <b>@{post.user.username}</b> {post.post.caption}
                     </div>
                     {post.commentsData.length ? (
-                      <div className="viewComment" onClick={viewPost}>
+                      <div className="viewComment" onClick={()=>viewPost(post)}>
                         {post.commentsData.length >= 2 ? (
                           <>View all {post.commentsData.length} comments</>
                         ) : (
@@ -108,8 +79,12 @@ const PostList = ({ posts, userInfo }) => {
                     )}
                   </div>
                   <div className="postComment">
-                    <input type="text" placeholder="Add a comment..."></input>
-                    <button onClick={(e) => postComment(e, post)}>Post</button>
+                    <input type="text" placeholder="Add a comment..." className="postCommentInput"></input>
+                    <button onClick={(e) => {
+                      let input = e.target.parentNode.firstChild
+                      postComment(input, post)
+                      }
+                    }>Post</button>
                   </div>
                 </div>
               </div>

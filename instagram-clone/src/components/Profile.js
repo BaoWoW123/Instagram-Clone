@@ -16,7 +16,6 @@ const Profile = (props) => {
   let [profileImgPixels, setProfileImgPixels] = useState({});
 
   const showProfilePopup = (e) => {
-    console.log("popup");
     const profilePopupWrapper = document.querySelector(".profilePopupWrapper");
     const profilePopupOptions = document.querySelector(".profilePopupOptions");
     if (profilePopupWrapper.className === "profilePopupWrapper") {
@@ -28,9 +27,7 @@ const Profile = (props) => {
   };
 
   const selectProfileImg = (e) => {
-    console.log("change");
     const imgInput = document.querySelector(".profileImgUpload");
-
     imgInput.click();
   };
 
@@ -40,7 +37,6 @@ const Profile = (props) => {
     const cropper = document.querySelector(".profileImgCropperWrapper");
     cropper.className = "profileImgCropperWrapper";
     profilePopupOptions.className = "profilePopupOptions hidden";
-    console.log("img selected");
     if (profileImgUpload.files.length) {
       await setProfileImgCrop(URL.createObjectURL(profileImgUpload.files[0]));
     }

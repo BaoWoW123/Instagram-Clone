@@ -1,6 +1,7 @@
 .Home {
   display: grid;
   grid-template-columns: 1fr 5fr 4fr;
+  position: relative;
 }
 
 .feed {
@@ -297,4 +298,117 @@ input:focus {
   color: gray;
   font-size: 15px;
   font-weight: bold;
+}
+
+
+.fullPostWrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(0, 0, 0, 0.8);
+  z-index: 1;
+}
+
+.fullPost {
+  width: 65%;
+  margin: auto;
+  background-color: white;
+  position: sticky;
+  top: 10vh;
+  display: flex;
+  height: 540px;
+}
+
+.fullPost img {
+  width: 720px;
+  height: 540px;
+}
+.postFeedWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: inherit;
+}
+
+.postFeedPoster {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.postFeedPoster {
+  padding: 10px;
+}
+.postFeedPoster img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.commentsWrapper {
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;  
+  flex: 1;
+  overflow: auto;
+}
+
+.commentWrapper {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  /* COMMENT SCROLL */
+}
+.commentWrapper img {
+  width: 40px;
+  border-radius: 50%;
+  height: 40px;
+}
+
+.fullPostUserWrapper {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid lightgray;
+}
+
+.fullPostPostBtn {
+  background-color: transparent;
+  border: none;
+  color: dodgerblue;
+  font-size: 20px;
+  font-weight: bold;
+  opacity: .4;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.fullPostPostBtn:hover {
+  opacity: 1;
+}
+
+.fullPostCommentInput {
+  border: none;
+  font-size: 20px;
+}
+
+.fullPostInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.fullPostInfo > div {
+  font-size: 10px;
+  color: gray;
+}
+.fullPostInfoBtns {
+  display: flex;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.fullPostInfoBtns :last-child {
+  margin-left: auto;
+}
+.fullPostInfoBtns > img {
+  width: 36px;
+  height: auto;
 }
