@@ -93,6 +93,7 @@ fieldset {
   display: flex;
   justify-content: center;
   padding: 30px;
+  background-color: white;
 }
 
 .signUp button {
@@ -105,6 +106,7 @@ fieldset {
   background-color: transparent;
   border: none;
 }
+
 .googleLogin {
   display: flex;
   align-items: center;
@@ -130,10 +132,17 @@ fieldset {
     cursor: pointer;
 }
 
-.signUp {
+.testAccLogin {
   background-color: white;
+  text-align: center;
 }
 
+.testAccLogin button {
+  padding: 10px;
+  color: dodgerblue;
+  font-size: 18px;
+  cursor: grab;
+}
 /* SIGN UP COMPONENT */
 .signupPage {
   display: flex;
@@ -211,6 +220,7 @@ fieldset {
   cursor: pointer;
 }
 
+/* terms of services/conditions in signup form */
 .ToS {
   font-size:14px;
   opacity: 0.5;

@@ -329,9 +329,12 @@ input:focus {
   width: 100%;
   background-color: inherit;
 }
-
+.commentWrapper :last-child{
+  width: 10vw;
+  word-wrap: break-word;
+}
 .postFeedPoster {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
 }

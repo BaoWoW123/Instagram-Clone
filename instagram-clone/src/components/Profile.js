@@ -5,7 +5,6 @@ import comment from "../assets/navBar/comment.png";
 import { testImgArr } from "./testImages";
 import Cropper from "react-easy-crop";
 import { useEffect, useState } from "react";
-import { async } from "@firebase/util";
 import { doc, setDoc } from "firebase/firestore";
 import { auth, database } from "../firebase";
 

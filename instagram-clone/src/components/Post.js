@@ -9,10 +9,9 @@ import {
   setDoc,
   collection,
   getCountFromServer,
-  getDoc,
 } from "firebase/firestore";
 
-//CAN ONLY POST ONE FILE AT A TIME
+//CAN ONLY POST ONE FILE
 const Post = (props) => {
   let [crop, setCrop] = useState({ x: 0, y: 0 });
   let [zoom, setZoom] = useState(1);
@@ -79,14 +78,14 @@ const Post = (props) => {
     );
 
     const canvasURL = canvas.toDataURL();
-    const postsRef = collection(database, "users", "testUser1", "posts"); //UPDATE test user to uid
+
+    const postsRef = collection(database, "users", props.user.uid, "posts");
     const snapshot = await getCountFromServer(postsRef);
     const postsCount = `${snapshot.data().count + 1}`;
     
     await setDoc(
-      doc(database, "users", "testUser1", "posts", `${postsRef.parent.id}-post${postsCount}`),
+      doc(database, "users", props.user.uid, "posts", `${postsRef.parent.id}-post${postsCount}`),
       {
-        //TEST USER INPUT, NOT DYNAMIC
         postId: `${postsRef.parent.id}-post${postsCount}`,
         postImg: canvasURL,
         caption: captionInput,

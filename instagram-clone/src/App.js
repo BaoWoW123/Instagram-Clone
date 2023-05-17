@@ -8,7 +8,6 @@ import "./styles/App.css";
 import Signup from "./components/Signup";
 import {
   getAuth,
-  onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
@@ -25,13 +24,15 @@ const App = () => {
 
   const logInEmail = (email, pw) => {
     signInWithEmailAndPassword(getAuth(), email, pw)
-      .then((userInfo) => {
-        console.log("signed in", userInfo);
-        navigate("/home");
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    .then((userInfo) => {
+      setUser(userInfo.user)
+      getUserInfo(userInfo.user)
+      localStorage.setItem("user", JSON.stringify(auth.currentUser));
+      navigate("/home");
+    })
+    .catch((error) => {
+      alert(error);
+    });
   };
   const createAcc = (email, pw, name, username) => {
     createUserWithEmailAndPassword(getAuth(), email, pw)
@@ -45,7 +46,7 @@ const App = () => {
       });
   };
   const storeAcc = async (user, name, username) => {
-    //adds new user to database
+    //adds new user to firestore users collection
     console.log("user", user);
     try {
       await setDoc(doc(database, "users", user.uid), {
@@ -71,11 +72,10 @@ const App = () => {
     await signInWithPopup(auth, provider);
     setUser(auth.currentUser);
     getUserInfo(auth.currentUser);
-    localStorage.setItem("user", JSON.stringify(auth.currentUser)); //only for google sign in
-    navigate("/home", {}, () => {
-      updatePage();
-    });
+    localStorage.setItem("user", JSON.stringify(auth.currentUser));
+    navigate("/home");
   };
+
   const signOutAcc = async () => {
     const moreMenu = document.querySelector(".moreMenu");
     if (moreMenu.className === "moreMenu") {
@@ -91,15 +91,10 @@ const App = () => {
     }
   };
 
-  const getUserInfo = async (user) => {
+  const getUserInfo = async (user) => { //gets firestore data (e.g. followers)
     const userRef = doc(database, "users", `${user.uid}`);
     const userData = (await getDoc(userRef)).data();
     setUserInfo(userData);
-  };
-  const updatePage = async () => {};
-
-  const firebaseAuth = () => {
-    onAuthStateChanged(getAuth());
   };
 
   useEffect(() => {
@@ -127,6 +122,7 @@ const App = () => {
               signInGoogle={signInGoogle}
               logInEmail={logInEmail}
               routeSignup={routeSignup}
+              signInTestAcc={logInEmail}
             />
           }
         />
@@ -137,12 +133,13 @@ const App = () => {
               signInGoogle={signInGoogle}
               logInEmail={logInEmail}
               routeSignup={routeSignup}
+              signInTestAcc={logInEmail}
             />
           }
         />
         <Route
           path="/post"
-          element={<Post signOut={signOutAcc} userInfo={userInfo} />}
+          element={<Post signOut={signOutAcc} userInfo={userInfo} user={user}/>}
         />
         <Route
           path="/profile"

@@ -1,5 +1,6 @@
 import "../styles/Forms.css";
 import google from "../assets/misc/googleLogo.png";
+
 const Login = (props) => {
   const showPassword = (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ const Login = (props) => {
       props.logInEmail(email, pw)
     }
   }
-  
+
   return (
     <div className="loginPage">
       <div>
@@ -49,6 +50,9 @@ const Login = (props) => {
             Don't have an account? <button onClick={props.routeSignup}>Sign up</button>
           </div>
         </fieldset>
+        <fieldset className="testAccLogin">
+            <button onClick={() =>props.signInTestAcc('test@gmail.com', 'test123')}> Sign in with test account</button>
+          </fieldset>
       </div>
     </div>
   );

@@ -204,7 +204,6 @@ const Home = (props) => {
         where("username", "==", `${comment.commentBy}`)
       );
       const commenter = await getDocs(q);
-
       if (commenter.size > 1) alert("same usernames in comments");
       const commenterData = commenter.docs[0].data();
       commentWrapper.className = "commentWrapper";
@@ -251,6 +250,7 @@ const Home = (props) => {
 
     await addDoc(commentsRef, commentData);
     commentInput.value = "";
+    console.log('added comment')
   };
 
   useEffect(() => {
