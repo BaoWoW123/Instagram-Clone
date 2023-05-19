@@ -1,7 +1,7 @@
 import "../styles/Home.css";
 import { testImgArr, testPostArr } from "./testImages";
 import NavBar from "./NavBar";
-import { createElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth, database } from "../firebase";
 import {
   addDoc,
@@ -75,6 +75,8 @@ const Home = (props) => {
       followersArray = ["testUser1", "testUser2"];
       console.log("added fake followers");
     } else followersArray = userDoc.followersArr;
+
+    followersArray.push(userId)
 
     //loop over followers, their posts, and comments
     for (let i = 0; i < followersArray.length; i++) {
